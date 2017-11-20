@@ -99,9 +99,7 @@ void ComandoIUUsuarioRemover::executar(ILNUsuario* cntrLNUsuario) throw(runtime_
 
     while(true){
             system("CLS");
-            cout << "CODIGO_SUCESSO       - " << Codigo::CODIGO_SUCESSO << endl;
-            cout << "CODIGO_FALHA         - " << Codigo::CODIGO_FALHA << endl;
-            cout << "CODIGO_ERRO_SISTEMA  - " << Codigo::CODIGO_ERRO_SISTEMA << endl;
+
         try{
             string codigoDoLivro;
             cout << "Digite o codigo do livro: ";

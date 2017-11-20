@@ -353,17 +353,22 @@ Resultado CntrLNUsuario::remover(const Codigo &codigo) throw(runtime_error) {
     cout << endl << "CntrLNUsuario::remover" << endl ;
 
     Resultado resultado;
+    try{
+        ComandoPesquisarLivro comandoPesquisarLivro(codigo);
+        comandoPesquisarLivro.executar();
+        Livro livroRecuperado;
+        livroRecuperado = comandoPesquisarLivro.getResultado();
+    }
+    catch(EErroPersistencia exp){
+        cout << endl <<"Livro nao encontrado no sistema." << endl;
+        resultado.setValor(ResultadoAutenticacao::FALHA);
+        return resultado;
+    }
+
+    ComandoRemoverLivro comandoRemoverLivro(codigo);
+    comandoRemoverLivro.executar();
 
     resultado.setValor(Resultado::SUCESSO);
-
-
-    if (codigo.getCodigo() == Codigo::CODIGO_ERRO_SISTEMA){
-        throw runtime_error("Erro de sistema");
-    }else if(codigo.getCodigo() == Codigo::CODIGO_SUCESSO){
-        resultado.setValor(ResultadoAutenticacao::SUCESSO);
-    }else{
-        resultado.setValor(ResultadoAutenticacao::FALHA);
-    }
 
     return resultado;
 }
