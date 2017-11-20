@@ -1,0 +1,442 @@
+# depslib dependency file v1.0
+1508206784 source:d:\downloads\exemplostp\lista 2\comandos.cpp
+	"comandos.h"
+
+1508204138 d:\downloads\exemplostp\lista 2\comandos.h
+	"interfaces.h"
+	"dominios.h"
+	"entidades.h"
+	"controladoras.h"
+	<stdexcept>
+	<iostream>
+	<cstdlib>
+	<string>
+
+1508186612 d:\downloads\exemplostp\lista 2\interfaces.h
+	"dominios.h"
+	"entidades.h"
+	<stdexcept>
+
+1508186827 d:\downloads\exemplostp\lista 2\dominios.h
+	<stdexcept>
+
+1508018386 d:\downloads\exemplostp\lista 2\entidades.h
+	"dominios.h"
+	<string>
+
+1508092592 d:\downloads\exemplostp\lista 2\controladoras.h
+	"interfaces.h"
+	"dominios.h"
+	<stdexcept>
+	<iostream>
+	<cstdlib>
+
+1508188426 source:d:\downloads\exemplostp\lista 2\controladoras.cpp
+	"controladoras.h"
+	"comandos.h"
+
+1508207418 source:d:\downloads\exemplostp\lista 2\dominios.cpp
+	"dominios.h"
+	<string>
+	<iostream>
+
+1507635544 source:d:\downloads\exemplostp\lista 2\entidades.cpp
+	"entidades.h"
+
+1508187096 source:d:\downloads\exemplostp\lista 2\main.cpp
+	<iostream>
+	<stdlib.h>
+	"dominios.h"
+	"entidades.h"
+	"testes.h"
+	"interfaces.h"
+	"controladoras.h"
+	"stubs.h"
+
+1507635556 d:\downloads\exemplostp\lista 2\testes.h
+	"dominios.h"
+
+1508186619 d:\downloads\exemplostp\lista 2\stubs.h
+	"interfaces.h"
+	"dominios.h"
+	<stdexcept>
+	<iostream>
+	<cstring>
+
+1508207355 source:d:\downloads\exemplostp\lista 2\stubs.cpp
+	"stubs.h"
+
+1508246088 source:e:\lista 2\comandos.cpp
+	"comandos.h"
+
+1508245400 e:\lista 2\comandos.h
+	"interfaces.h"
+	"dominios.h"
+	"entidades.h"
+	"controladoras.h"
+	<stdexcept>
+	<iostream>
+	<cstdlib>
+	<string>
+
+1508245622 e:\lista 2\interfaces.h
+	"dominios.h"
+	"entidades.h"
+	<stdexcept>
+
+1508244302 e:\lista 2\dominios.h
+	<stdexcept>
+
+1508245858 e:\lista 2\entidades.h
+	"dominios.h"
+	<string>
+
+1508245478 e:\lista 2\controladoras.h
+	"interfaces.h"
+	"dominios.h"
+	<stdexcept>
+	<iostream>
+	<cstdlib>
+
+1508245444 source:e:\lista 2\controladoras.cpp
+	"controladoras.h"
+	"comandos.h"
+
+1508245514 source:e:\lista 2\dominios.cpp
+	"dominios.h"
+	<string>
+	<iostream>
+
+1508244302 source:e:\lista 2\entidades.cpp
+	"entidades.h"
+
+1508245704 source:e:\lista 2\stubs.cpp
+	"stubs.h"
+
+1508245498 e:\lista 2\stubs.h
+	"interfaces.h"
+	"dominios.h"
+	<stdexcept>
+	<iostream>
+	<cstring>
+
+1508187098 source:e:\lista 2\main.cpp
+	<iostream>
+	<stdlib.h>
+	"dominios.h"
+	"entidades.h"
+	"testes.h"
+	"interfaces.h"
+	"controladoras.h"
+	"stubs.h"
+
+1507635556 e:\lista 2\testes.h
+	"dominios.h"
+
+1508246088 source:d:\downloads\exemplostp\tp1-02-150037023-160126975\lista 2\comandos.cpp
+	"comandos.h"
+
+1508245400 d:\downloads\exemplostp\tp1-02-150037023-160126975\lista 2\comandos.h
+	"interfaces.h"
+	"dominios.h"
+	"entidades.h"
+	"controladoras.h"
+	<stdexcept>
+	<iostream>
+	<cstdlib>
+	<string>
+
+1508245622 d:\downloads\exemplostp\tp1-02-150037023-160126975\lista 2\interfaces.h
+	"dominios.h"
+	"entidades.h"
+	<stdexcept>
+
+1508244302 d:\downloads\exemplostp\tp1-02-150037023-160126975\lista 2\dominios.h
+	<stdexcept>
+
+1508245858 d:\downloads\exemplostp\tp1-02-150037023-160126975\lista 2\entidades.h
+	"dominios.h"
+	<string>
+
+1508245478 d:\downloads\exemplostp\tp1-02-150037023-160126975\lista 2\controladoras.h
+	"interfaces.h"
+	"dominios.h"
+	<stdexcept>
+	<iostream>
+	<cstdlib>
+
+1508245444 source:d:\downloads\exemplostp\tp1-02-150037023-160126975\lista 2\controladoras.cpp
+	"controladoras.h"
+	"comandos.h"
+
+1508245514 source:d:\downloads\exemplostp\tp1-02-150037023-160126975\lista 2\dominios.cpp
+	"dominios.h"
+	<string>
+	<iostream>
+
+1508244302 source:d:\downloads\exemplostp\tp1-02-150037023-160126975\lista 2\entidades.cpp
+	"entidades.h"
+
+1508246628 source:d:\downloads\exemplostp\tp1-02-150037023-160126975\lista 2\main.cpp
+	<iostream>
+	<stdlib.h>
+	"dominios.h"
+	"entidades.h"
+	"testes.h"
+	"interfaces.h"
+	"controladoras.h"
+	"stubs.h"
+
+1507635556 d:\downloads\exemplostp\tp1-02-150037023-160126975\lista 2\testes.h
+	"dominios.h"
+
+1508245498 d:\downloads\exemplostp\tp1-02-150037023-160126975\lista 2\stubs.h
+	"interfaces.h"
+	"dominios.h"
+	<stdexcept>
+	<iostream>
+	<cstring>
+
+1508245704 source:d:\downloads\exemplostp\tp1-02-150037023-160126975\lista 2\stubs.cpp
+	"stubs.h"
+
+1508246088 source:d:\downloads\exemplostp\tp1-02-150037023-160126975\lista3\comandos.cpp
+	"comandos.h"
+
+1508245400 d:\downloads\exemplostp\tp1-02-150037023-160126975\lista3\comandos.h
+	"interfaces.h"
+	"dominios.h"
+	"entidades.h"
+	"controladoras.h"
+	<stdexcept>
+	<iostream>
+	<cstdlib>
+	<string>
+
+1510514911 d:\downloads\exemplostp\tp1-02-150037023-160126975\lista3\interfaces.h
+	"dominios.h"
+	"entidades.h"
+	<stdexcept>
+
+1511025041 d:\downloads\exemplostp\tp1-02-150037023-160126975\lista3\dominios.h
+	<stdexcept>
+
+1511025030 d:\downloads\exemplostp\tp1-02-150037023-160126975\lista3\entidades.h
+	"dominios.h"
+	<string>
+
+1510841867 d:\downloads\exemplostp\tp1-02-150037023-160126975\lista3\controladoras.h
+	"interfaces.h"
+	"dominios.h"
+	<stdexcept>
+	<iostream>
+	<cstdlib>
+
+1510976575 source:d:\downloads\exemplostp\tp1-02-150037023-160126975\lista3\controladoras.cpp
+	"controladoras.h"
+	"comandos.h"
+
+1511025042 source:d:\downloads\exemplostp\tp1-02-150037023-160126975\lista3\dominios.cpp
+	"dominios.h"
+	<string>
+	<iostream>
+
+1508244302 source:d:\downloads\exemplostp\tp1-02-150037023-160126975\lista3\entidades.cpp
+	"entidades.h"
+
+1510514941 source:d:\downloads\exemplostp\tp1-02-150037023-160126975\lista3\main.cpp
+	<iostream>
+	<stdlib.h>
+	"dominios.h"
+	"entidades.h"
+	"testes.h"
+	"interfaces.h"
+	"controladoras.h"
+	"stubs.h"
+
+1507635556 d:\downloads\exemplostp\tp1-02-150037023-160126975\lista3\testes.h
+	"dominios.h"
+
+1510065507 d:\downloads\exemplostp\tp1-02-150037023-160126975\lista3\stubs.h
+	"interfaces.h"
+	"dominios.h"
+	<stdexcept>
+	<iostream>
+	<cstring>
+
+1510065561 source:d:\downloads\exemplostp\tp1-02-150037023-160126975\lista3\stubs.cpp
+	"stubs.h"
+
+1511035980 source:d:\downloads\exemplostp\tp1-02-150037023-160126975\lista3\unidadepersistencia.cpp
+	"unidadePersistencia.h"
+	"stdlib.h"
+
+1511030654 d:\downloads\exemplostp\tp1-02-150037023-160126975\lista3\unidadepersistencia.h
+	"dominios.h"
+	"entidades.h"
+	<list>
+	<iostream>
+	<conio.h>
+	<string>
+	<stdio.h>
+	"sqlite3.h"
+
+1134995870 d:\downloads\exemplostp\tp1-02-150037023-160126975\lista3\sqlite3.h
+	<stdarg.h>
+
+1511147156 source:d:\downloads\unb\tp1\lista 3\comandos.cpp
+	"comandos.h"
+
+1511142857 d:\downloads\unb\tp1\lista 3\comandos.h
+	"interfaces.h"
+	"dominios.h"
+	"entidades.h"
+	"controladoras.h"
+	"global.h"
+	<stdexcept>
+	<iostream>
+	<cstdlib>
+	<string>
+
+1511147182 d:\downloads\unb\tp1\lista 3\interfaces.h
+	"dominios.h"
+	"entidades.h"
+	"global.h"
+	<stdexcept>
+
+1511145722 d:\downloads\unb\tp1\lista 3\dominios.h
+	<stdexcept>
+
+1511145218 d:\downloads\unb\tp1\lista 3\entidades.h
+	"dominios.h"
+	<string>
+
+1511147268 d:\downloads\unb\tp1\lista 3\controladoras.h
+	"interfaces.h"
+	"dominios.h"
+	"unidadePersistencia.h"
+	"global.h"
+	<stdexcept>
+	<iostream>
+	<cstdlib>
+
+1511147026 source:d:\downloads\unb\tp1\lista 3\controladoras.cpp
+	"controladoras.h"
+	"comandos.h"
+	"interfaces.h"
+	"global.h"
+
+1511145875 source:d:\downloads\unb\tp1\lista 3\dominios.cpp
+	"dominios.h"
+	<string>
+	<iostream>
+
+1511010788 source:d:\downloads\unb\tp1\lista 3\entidades.cpp
+	"entidades.h"
+
+1511142857 source:d:\downloads\unb\tp1\lista 3\main.cpp
+	<iostream>
+	<stdlib.h>
+	"dominios.h"
+	"entidades.h"
+	"testes.h"
+	"interfaces.h"
+	"controladoras.h"
+	"stubs.h"
+	"global.h"
+
+1511010764 d:\downloads\unb\tp1\lista 3\testes.h
+	"dominios.h"
+
+1511010782 d:\downloads\unb\tp1\lista 3\stubs.h
+	"interfaces.h"
+	"dominios.h"
+	<stdexcept>
+	<iostream>
+	<cstring>
+
+1511049038 source:d:\downloads\unb\tp1\lista 3\stubs.cpp
+	"stubs.h"
+
+1511146138 source:d:\downloads\unb\tp1\lista 3\unidadepersistencia.cpp
+	"unidadePersistencia.h"
+	"stdlib.h"
+
+1511146062 d:\downloads\unb\tp1\lista 3\unidadepersistencia.h
+	"dominios.h"
+	"entidades.h"
+	<list>
+	<iostream>
+	<conio.h>
+	<string>
+	<stdio.h>
+	"sqlite3.h"
+
+1508876760 d:\downloads\unb\tp1\lista 3\sqlite3.h
+	<stdarg.h>
+
+1508876760 source:d:\downloads\unb\tp1\lista 3\sqlite3.c
+	"config.h"
+	<vxWorks.h>
+	<pthread.h>
+	"mingw.h"
+	"_mingw.h"
+	<stdarg.h>
+	<stdint.h>
+	<inttypes.h>
+	<intrin.h>
+	<cmnintrin.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<assert.h>
+	<stddef.h>
+	<TargetConditionals.h>
+	<ctype.h>
+	<time.h>
+	<sys/sysctl.h>
+	<malloc/malloc.h>
+	<libkern/OSAtomic.h>
+	<malloc.h>
+	<pthread.h>
+	"windows.h"
+	<sys/cygwin.h>
+	<errno.h>
+	<process.h>
+	<math.h>
+	<sys/types.h>
+	<sys/stat.h>
+	<fcntl.h>
+	<sys/ioctl.h>
+	<unistd.h>
+	<sys/time.h>
+	<errno.h>
+	<sys/mman.h>
+	<sys/file.h>
+	<sys/param.h>
+	<semaphore.h>
+	<limits.h>
+	<sys/mount.h>
+	<utime.h>
+	<sys/dcmd_blk.h>
+	<sys/statvfs.h>
+	<dlfcn.h>
+	"sqlite_tcl.h"
+	"tcl.h"
+	"sqlite3rtree.h"
+	<unicode/utypes.h>
+	<unicode/uregex.h>
+	<unicode/ustring.h>
+	<unicode/ucol.h>
+	<unicode/ubrk.h>
+	<unicode/utf16.h>
+	<ctype.h>
+	<math.h>
+
+1511142776 d:\downloads\unb\tp1\lista 3\global.h
+	"dominios.h"
+	"entidades.h"
+
+1511142935 source:d:\downloads\unb\tp1\lista 3\global.cpp
+	"global.h"
+
