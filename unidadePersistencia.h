@@ -21,6 +21,11 @@ using namespace std;
 
 //---------------------------------------------------------------------------
 //Classe EErroPersistencia.
+///Esta classe define as variáveis e métodos utilizados em caso de erro na conexão 
+///com o banco de dados. Como variável privada, possui a string "mensagem", que é 
+///utilizada para armazenar a mensagem de erro produzida pelo programa.
+///O método público "EErroPersistencia" recebe a string que será armazenada em mensagem. 
+///A string pública "what" é utilizada para retornar a mensagem para outros métodos.
 
 class EErroPersistencia {
 private:
