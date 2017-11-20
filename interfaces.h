@@ -96,7 +96,7 @@ public:
 
 class ILNUsuario {
 public:
-    virtual Resultado incluir(const Codigo&, const Titulo&, const GeneroLiterario&) throw(runtime_error) = 0;
+    virtual Resultado incluir(const Livro&) throw(runtime_error) = 0;
     virtual Resultado remover(const Codigo&) throw(runtime_error) = 0;
     virtual ResultadoLivro consultar(const Codigo&) throw(runtime_error) = 0;
     virtual ResultadoResenha escrever(const Titulo&, const Texto&, const Data&) throw(runtime_error) = 0;

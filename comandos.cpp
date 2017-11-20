@@ -11,30 +11,26 @@
 void ComandoIUUsuarioIncluir::executar(ILNUsuario* cntrLNUsuario) throw(runtime_error){
 
     Resultado resultado;
-
+    Livro livro;
+    Exemplar exemplar;
     Codigo codigo;
     Titulo titulo;
     GeneroLiterario generoLiterario;
+    Data data;
+    Autor autor;
 
 
     // Código de interação com o usuário.
 
     while(true){
             system("CLS");
-            cout << "CODIGO_SUCESSO       - " << Codigo::CODIGO_SUCESSO << endl;
-            cout << "CODIGO_FALHA         - " << Codigo::CODIGO_FALHA << endl;
-            cout << "CODIGO_ERRO_SISTEMA  - " << Codigo::CODIGO_ERRO_SISTEMA << endl;
 
-            cout << "TITULO_SUCESSO       - " << Titulo::TITULO_SUCESSO << endl;
-            cout << "TITULO_FALHA         - " << Titulo::TITULO_FALHA << endl;
-            cout << "TITULO_ERRO_SISTEMA  - " << Titulo::TITULO_ERRO_SISTEMA << endl;
-
-            cout << "GENERO_FALHA         - " << GeneroLiterario::GENERO_FALHA << endl;
-            cout << "GENERO_ERRO_SISTEMA  - " << GeneroLiterario::GENERO_ERRO_SISTEMA << endl;
         try{
             string codigoDoLivro;
             string tituloDoLivro;
             string generoDoLivro;
+            string dataDoLivro;
+            string autorDoLivro;
             cout << "Digite o codigo do livro: ";
             cin.sync(); //sincronizar buffer para evitar loop
             cin >> codigoDoLivro;
@@ -44,6 +40,16 @@ void ComandoIUUsuarioIncluir::executar(ILNUsuario* cntrLNUsuario) throw(runtime_
             cin.sync(); //sincronizar buffer para evitar loop
             cin >> tituloDoLivro;
             titulo.setTitulo(tituloDoLivro);
+
+            cout << "Digite o nome do autor do livro: ";
+            cin.sync(); //sincronizar buffer para evitar loop
+            cin >> autorDoLivro;
+            autor.setAutor(autorDoLivro);
+
+            cout << "Digite a data de publicacao do livro: ";
+            cin.sync(); //sincronizar buffer para evitar loop
+            cin >> dataDoLivro;
+            data.setData(dataDoLivro);
 
             cout << "Digite o genero do livro: "<< endl;
             cout << "CONTO, ENSAIO, EPOPEIA, NOVELA ou ROMANCE." << endl;
@@ -59,13 +65,18 @@ void ComandoIUUsuarioIncluir::executar(ILNUsuario* cntrLNUsuario) throw(runtime_
     }
 
     // Solicitar serviço.
+    livro.setCodigo(codigo);
+    livro.setTitulo(titulo);
+    livro.setAutor(autor);
+    livro.setData(data);
+    livro.setGeneroLiterario(generoLiterario);
 
-    resultado = cntrLNUsuario->incluir(codigo, titulo, generoLiterario);
+    resultado = cntrLNUsuario->incluir(livro);
 
     if(resultado.getValor() == Resultado::SUCESSO){
          cout << "Sucesso na execucao da operacao" << endl;
     }
-    else {
+    else if(resultado.getValor() == Resultado::FALHA) {
         cout << "Falha na execucao da operacao" << endl;
     }
     system("PAUSE");

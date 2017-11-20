@@ -275,33 +275,68 @@ Resultado CntrLNAutenticacao::cadastrar(const Usuario &usuario) throw(runtime_er
 /// A função stub neste momento preenche o lugar da função definitiva de autenticação para fins de teste de integração.
 /// Recebe os dados do livro para comparar com os dados do servidor e retorna o valor do resultado.
 
-Resultado CntrLNUsuario::incluir(const Codigo &codigo, const Titulo &titulo, const GeneroLiterario &generoLiterario) throw(runtime_error){
-    Livro livro;
+Resultado CntrLNUsuario::incluir(const Livro &livro) throw(runtime_error){
+
     // Apresentar dados recebidos.
 
     cout << endl << "CntrLNUsuario::incluir" << endl ;
 
     Resultado resultado;
 
+     //Primeiro confirmaremos se o usuario ainda não atingiu o limite de livros na biblioteca
+    ComandoPesquisarExemplar comandoPesquisarExemplar(usuarioAtual.getApelido());
 
+        comandoPesquisarExemplar.executar();
+        int j = 0;
+        while(true){
+            try{
+                usuarioAtual.setEstante(comandoPesquisarExemplar.getResultado(), j);
+                j++;
+                if(j>9){
+                    resultado.setValor(Resultado::FALHA);
+                    cout << "A estante ja esta cheia." << endl;
+                    return resultado;
+                }
 
-    // Diferentes comportamentos dependendo do valor da matrícula.
+            }
+            catch(EErroPersistencia exp){
+                cout << "Estante processada!"<< endl;
+                break;
+            }
 
+        }
+        //Agora testa se o usuario ja possui um exemplar desse livro na estante
+        int i;
+        for(i=0; i<j; i++){
+            if(usuarioAtual.getEstante(i).getCodigo().getCodigo() == livro.getCodigo().getCodigo()){
+                resultado.setValor(Resultado::FALHA);
+                cout << "O usuario ja possui esse livro na estante." << endl;
+                return resultado;
+            }
+        }
+    Exemplar exemplar;
+    try{
+        //Confere se o livro ja esta cadastrado
+        ComandoPesquisarLivro comandoPesquisarLivro(livro.getCodigo());
+        comandoPesquisarLivro.executar();
+        Livro livroRecuperado;
+        livroRecuperado = comandoPesquisarLivro.getResultado();
+        //Se encontrar o livro, cadastra o exemplar vinculado ao usuario
 
-    if(codigo.getCodigo() == Codigo::CODIGO_ERRO_SISTEMA ||//erro de sistema
-        titulo.getTitulo() == Titulo::TITULO_ERRO_SISTEMA ||
-       generoLiterario.getGeneroLiterario() == GeneroLiterario::GENERO_ERRO_SISTEMA){
-        throw runtime_error("Erro de sistema");
-    }else if(codigo.getCodigo() == Codigo::CODIGO_FALHA ||  //falha
-        titulo.getTitulo() == Titulo::TITULO_FALHA ||
-       generoLiterario.getGeneroLiterario() == GeneroLiterario::GENERO_FALHA){
-            resultado.setValor(Resultado::FALHA);
-       }else{                                               //sucesso
-            resultado.setValor(Resultado::SUCESSO);
-       }
+    }
+    catch(EErroPersistencia exp){
+        //Se não encontrar o livro, cadastra o livro no banco de dados
+        ComandoCadastrarLivro comandoCadastrarLivro(livro);
+        comandoCadastrarLivro.executar();
 
+    }
+    //Faz o cadastro do exemplar. A chave de troca é sempre inicializada em '0'.
+    exemplar.setApelido(usuarioAtual.getApelido());
+    exemplar.setCodigo(livro.getCodigo());
+    ComandoCadastrarExemplar comandoCadastrarExemplar(exemplar);
+    comandoCadastrarExemplar.executar();
 
-
+    resultado.setValor(Resultado::SUCESSO);
 
     return resultado;
 }

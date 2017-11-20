@@ -87,7 +87,7 @@ class CntrLNUsuario:public ILNUsuario{  // classe implementa a interface.
 public:
 
     ///declaracoes dos metodos previstos na interface
-    Resultado incluir(const Codigo&, const Titulo&, const GeneroLiterario&) throw(runtime_error);
+    Resultado incluir(const Livro&) throw(runtime_error);
     Resultado remover(const Codigo&) throw(runtime_error);
     ResultadoLivro consultar(const Codigo&) throw(runtime_error);
     ResultadoResenha escrever(const Titulo&, const Texto&, const Data&) throw(runtime_error);
