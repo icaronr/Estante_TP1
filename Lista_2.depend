@@ -443,12 +443,13 @@
 1511199446 source:d:\downloads\unb\tp1\estante_tp1\comandos.cpp
 	"comandos.h"
 
-1511196209 d:\downloads\unb\tp1\estante_tp1\comandos.h
+1511201912 d:\downloads\unb\tp1\estante_tp1\comandos.h
 	"interfaces.h"
 	"dominios.h"
 	"entidades.h"
 	"controladoras.h"
 	"global.h"
+	"unidadePersistencia.h"
 	<stdexcept>
 	<iostream>
 	<cstdlib>
@@ -589,7 +590,7 @@
 1511196210 source:d:\downloads\unb\tp1\estante_tp1\stubs.cpp
 	"stubs.h"
 
-1511199500 source:d:\downloads\unb\tp1\estante_tp1\controladoras.cpp
+1511201264 source:d:\downloads\unb\tp1\estante_tp1\controladoras.cpp
 	"controladoras.h"
 	"comandos.h"
 	"interfaces.h"

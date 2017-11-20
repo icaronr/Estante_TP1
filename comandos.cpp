@@ -341,13 +341,18 @@ void ComandoIUUsuarioTrocar::executar(ILNUsuario* cntrLNUsuario)throw(runtime_er
         cout << "Sucesso na execucao da operacao" << endl;
         cout << "Foram encontrados usuarios que possuem o livro para troca" << endl;
         while(!exemplarTrocaGlobal.empty()){
-            
+            exemplar = exemplarTrocaGlobal.back();
+            exemplarTrocaGlobal.pop_back();
+            ComandoPesquisarUsuario comandoPesquisarUsuario(exemplar.getApelido());
+            comandoPesquisarUsuario.executar();
+            usuario = comandoPesquisarUsuario.getResultado();
+
             cout << "Livro    - " << titulo.getTitulo() << endl;
             cout << "Nome     - " << usuario.getNome().getNome() << endl;
             cout << "Apelido  - " << usuario.getApelido().getApelido() << endl;
-            cout << "Telefone - " << usuario.getTelefone().getTelefone() << endl; 
+            cout << "Telefone - " << usuario.getTelefone().getTelefone() << endl;
         }
-         
+
     }
     else if(resultado.getValor() == Resultado::FALHA){
         cout << "Falha na execucao da operacao" << endl;
