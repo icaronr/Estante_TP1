@@ -11,6 +11,49 @@ using namespace std;
 ///ou seja, nome, apelido, telefone e senha do usuario.
 /// Os metodos desse bloco servem para atribuir valores aos objetos da Entidade (metodos "set")
 ///ou para retornar os valores dos objetos da Entidade.
+
+
+///Esta classe define os tipos basicos para os exemplares que podem ser
+///associadas a cada livro. Sao eles: troca, codigo e apelido.
+///Os metodos deste bloco servem para atribuir os valores dos objetos da Entidade (setters)
+/// ou para retornar os valores (getters).
+class Exemplar {
+private:
+
+    Troca troca;
+    Apelido apelido;
+    Codigo codigo;
+
+public:
+
+    void setTroca(const Troca &troca){
+        this->troca = troca;
+    }
+
+    void setApelido(const Apelido &apelido){
+        this->apelido = apelido;
+    }
+
+    void setCodigo(const Codigo &codigo){
+        this->codigo = codigo;
+    }
+
+    ///*****Getters*****
+    /// Os metodos desse bloco servem para retornar os valores dos objetos da Entidade.
+    Troca getTroca() const {
+        return troca;
+    }
+    Apelido getApelido() const{
+        return apelido;
+    }
+    Codigo getCodigo() const{
+        return codigo;
+    }
+};
+
+///Esta classe define a entidade Usuario, que armazena os dados de
+/// nome, apelido, senha e telefone. Também foi vinculado um array de exemplares
+/// para estruturar a estante virtual do usuário.
 class Usuario {
 
 private:
@@ -18,6 +61,7 @@ private:
     Apelido apelido;
     Telefone telefone;
     Senha senha;
+    Exemplar estante[10];
 
 public:
     void setNome (const Nome &nome){
@@ -32,6 +76,9 @@ public:
     void setSenha (const Senha &senha){
         this->senha = senha;
     }
+    void setEstante(const Exemplar &exemplar, int pos){
+        this->estante[pos] = exemplar;
+    }
     Nome getNome() const{
         return nome;
     }
@@ -43,6 +90,9 @@ public:
     }
     Senha getSenha() const{
         return senha;
+    }
+    Exemplar getEstante(int pos) const{
+        return estante[pos];
     }
 };
 
@@ -139,44 +189,6 @@ public:
     }
     Texto getTexto() const{
         return texto;
-    }
-    Apelido getApelido() const{
-        return apelido;
-    }
-    Codigo getCodigo() const{
-        return codigo;
-    }
-};
-
-///Esta classe define os tipos basicos para os exemplares que podem ser
-///associadas a cada livro. Sao eles: troca, codigo e apelido.
-///Os metodos deste bloco servem para atribuir os valores dos objetos da Entidade (setters)
-/// ou para retornar os valores (getters).
-class Exemplar {
-private:
-
-    Troca troca;
-    Apelido apelido;
-    Codigo codigo;
-
-public:
-
-    void setTroca(const Troca &troca){
-        this->troca = troca;
-    }
-
-    void setApelido(const Apelido &apelido){
-        this->apelido = apelido;
-    }
-
-    void setCodigo(const Codigo &codigo){
-        this->codigo = codigo;
-    }
-
-    ///*****Getters*****
-    /// Os metodos desse bloco servem para retornar os valores dos objetos da Entidade.
-    Troca getTroca() const {
-        return troca;
     }
     Apelido getApelido() const{
         return apelido;

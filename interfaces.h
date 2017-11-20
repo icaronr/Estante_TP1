@@ -6,6 +6,7 @@
 #include "global.h"
 
 #include <stdexcept>
+#include <list>
 
 using namespace std;
 

@@ -9,6 +9,7 @@
 #include <stdexcept>
 #include <iostream>
 #include <cstdlib>
+#include <list>
 
 using namespace std;
 

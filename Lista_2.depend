@@ -440,3 +440,162 @@
 1511142935 source:d:\downloads\unb\tp1\lista 3\global.cpp
 	"global.h"
 
+1511199446 source:d:\downloads\unb\tp1\estante_tp1\comandos.cpp
+	"comandos.h"
+
+1511196209 d:\downloads\unb\tp1\estante_tp1\comandos.h
+	"interfaces.h"
+	"dominios.h"
+	"entidades.h"
+	"controladoras.h"
+	"global.h"
+	<stdexcept>
+	<iostream>
+	<cstdlib>
+	<string>
+
+1511199534 d:\downloads\unb\tp1\estante_tp1\interfaces.h
+	"dominios.h"
+	"entidades.h"
+	"global.h"
+	<stdexcept>
+	<list>
+
+1511196209 d:\downloads\unb\tp1\estante_tp1\dominios.h
+	<stdexcept>
+
+1511197280 d:\downloads\unb\tp1\estante_tp1\entidades.h
+	"dominios.h"
+	<string>
+
+1511199613 d:\downloads\unb\tp1\estante_tp1\global.h
+	"dominios.h"
+	"entidades.h"
+	<list>
+
+1511199512 d:\downloads\unb\tp1\estante_tp1\controladoras.h
+	"interfaces.h"
+	"dominios.h"
+	"unidadePersistencia.h"
+	"global.h"
+	<stdexcept>
+	<iostream>
+	<cstdlib>
+	<list>
+
+1511196210 d:\downloads\unb\tp1\estante_tp1\unidadepersistencia.h
+	"dominios.h"
+	"entidades.h"
+	<list>
+	<iostream>
+	<conio.h>
+	<string>
+	<stdio.h>
+	"sqlite3.h"
+
+1511196209 d:\downloads\unb\tp1\estante_tp1\sqlite3.h
+	<stdarg.h>
+
+1511196209 source:d:\downloads\unb\tp1\estante_tp1\dominios.cpp
+	"dominios.h"
+	<string>
+	<iostream>
+
+1511196209 source:d:\downloads\unb\tp1\estante_tp1\entidades.cpp
+	"entidades.h"
+
+1511199643 source:d:\downloads\unb\tp1\estante_tp1\global.cpp
+	"global.h"
+
+1511196209 source:d:\downloads\unb\tp1\estante_tp1\main.cpp
+	<iostream>
+	<stdlib.h>
+	"dominios.h"
+	"entidades.h"
+	"testes.h"
+	"interfaces.h"
+	"controladoras.h"
+	"stubs.h"
+	"global.h"
+
+1511196210 d:\downloads\unb\tp1\estante_tp1\testes.h
+	"dominios.h"
+
+1511196210 d:\downloads\unb\tp1\estante_tp1\stubs.h
+	"interfaces.h"
+	"dominios.h"
+	<stdexcept>
+	<iostream>
+	<cstring>
+
+1511196209 source:d:\downloads\unb\tp1\estante_tp1\sqlite3.c
+	"config.h"
+	<vxWorks.h>
+	<pthread.h>
+	"mingw.h"
+	"_mingw.h"
+	<stdarg.h>
+	<stdint.h>
+	<inttypes.h>
+	<intrin.h>
+	<cmnintrin.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<assert.h>
+	<stddef.h>
+	<TargetConditionals.h>
+	<ctype.h>
+	<time.h>
+	<sys/sysctl.h>
+	<malloc/malloc.h>
+	<libkern/OSAtomic.h>
+	<malloc.h>
+	<pthread.h>
+	"windows.h"
+	<sys/cygwin.h>
+	<errno.h>
+	<process.h>
+	<math.h>
+	<sys/types.h>
+	<sys/stat.h>
+	<fcntl.h>
+	<sys/ioctl.h>
+	<unistd.h>
+	<sys/time.h>
+	<errno.h>
+	<sys/mman.h>
+	<sys/file.h>
+	<sys/param.h>
+	<semaphore.h>
+	<limits.h>
+	<sys/mount.h>
+	<utime.h>
+	<sys/dcmd_blk.h>
+	<sys/statvfs.h>
+	<dlfcn.h>
+	"sqlite_tcl.h"
+	"tcl.h"
+	"sqlite3rtree.h"
+	<unicode/utypes.h>
+	<unicode/uregex.h>
+	<unicode/ustring.h>
+	<unicode/ucol.h>
+	<unicode/ubrk.h>
+	<unicode/utf16.h>
+	<ctype.h>
+	<math.h>
+
+1511196210 source:d:\downloads\unb\tp1\estante_tp1\stubs.cpp
+	"stubs.h"
+
+1511199500 source:d:\downloads\unb\tp1\estante_tp1\controladoras.cpp
+	"controladoras.h"
+	"comandos.h"
+	"interfaces.h"
+	"global.h"
+
+1511198265 source:d:\downloads\unb\tp1\estante_tp1\unidadepersistencia.cpp
+	"unidadePersistencia.h"
+	"stdlib.h"
+

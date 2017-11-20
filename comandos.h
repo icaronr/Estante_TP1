@@ -6,6 +6,7 @@
 #include "entidades.h"
 #include "controladoras.h"
 #include "global.h"
+#include "unidadePersistencia.h"
 
 #include <stdexcept>
 #include <iostream>

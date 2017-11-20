@@ -479,37 +479,34 @@ ResultadoUsuario CntrLNUsuario::trocar(const Titulo &titulo, const int operacao)
     if(operacao == 1){
         ComandoAtualizarExemplar comandoAtualizarExemplar(exemplar);
         comandoAtualizarExemplar.executar();
-    }else{
-        try{
-            ComandoPesquisarExemplar comandoPesquisarExemplar(livroRecuperado.getCodigo());
-            comandoPesquisarExemplar.executar();
-            
-        }
-    }
-
-
-
-
-
-    // A seguir devem ser implementados os diferentes comportamentos.
-
-    if(titulo.getTitulo() == Titulo::TITULO_ERRO_SISTEMA){// Erro de sistema.
-         throw runtime_error("Erro de sistema");
-
-    }else if(titulo.getTitulo() == Titulo::TITULO_SUCESSO){// Sucesso.
         resultado.setValor(Resultado::SUCESSO);
-        nome.setNome(Nome::NOME_FALHA);
-        apelido.setApelido(Apelido::APELIDO_FALHA);
-        telefone.setTelefone(Telefone::TELEFONE_FALHA);
-        usuario.setApelido(apelido);
-        usuario.setNome(nome);
-        usuario.setTelefone(telefone);
-        resultado.setUsuario(usuario);
 
     }else{
-        resultado.setValor(Resultado::FALHA);// Falha.
-    }
+        ComandoPesquisarExemplar comandoPesquisarExemplar(livroRecuperado.getCodigo());
+        try{
 
+            comandoPesquisarExemplar.executar();
+            //esvazia a lista global
+            while(!exemplarTrocaGlobal.empty()){
+                exemplarTrocaGlobal.pop_back();
+            }
+        }
+        catch(EErroPersistencia exp){
+            cout << "Nao foram encontrados usuarios com esse livro." << endl;
+            resultado.setValor(Resultado::FALHA);
+            return resultado;
+        }
+        try{
+            while(true){
+                exemplarTrocaGlobal.push_front(comandoPesquisarExemplar.getResultado());
+
+            }
+        }
+        catch(EErroPersistencia exp){
+            resultado.setValor(Resultado::SUCESSO);
+        }
+
+    }
 
     return resultado;
 }

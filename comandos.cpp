@@ -187,7 +187,7 @@ void ComandoIUUsuarioPesquisar::executar(ILNUsuario* cntrLNUsuario)throw(runtime
 
     while(true){
             system("CLS");
-            
+
         try{
             string apelidoUsuario;
             cout << "Digite o apelido do usuario: ";
@@ -233,7 +233,7 @@ void ComandoIUUsuarioEscrever::executar(ILNUsuario* cntrLNUsuario)throw(runtime_
     // Código de interação com o usuário.
     while(true){
             system("CLS");
-            
+
         try{
             string tituloResenha;
             cout << "Digite o titulo: ";
@@ -286,6 +286,7 @@ void ComandoIUUsuarioTrocar::executar(ILNUsuario* cntrLNUsuario)throw(runtime_er
     int opcao;
     Titulo titulo;
 
+
     // Código de interação com o usuário.
     while(true){
             system("CLS");
@@ -298,17 +299,17 @@ void ComandoIUUsuarioTrocar::executar(ILNUsuario* cntrLNUsuario)throw(runtime_er
             cout << "Digite o titulo para informar troca: ";
             cin.sync(); //sincronizar buffer para evitar loop
             cin >> noskipws>> tituloTroca;
-        
+
             titulo.setTitulo(tituloTroca);
             cin.sync(); //sincronizar buffer para evitar loop
             break;
-        }else if(opcao == 2){    
+        }else if(opcao == 2){
             try{
                 string tituloTroca;
                 cout << "Digite o titulo: ";
                 cin.sync(); //sincronizar buffer para evitar loop
                 cin >> noskipws>> tituloTroca;
-        
+
                 titulo.setTitulo(tituloTroca);
                 cin.sync(); //sincronizar buffer para evitar loop
                 break;
@@ -321,7 +322,7 @@ void ComandoIUUsuarioTrocar::executar(ILNUsuario* cntrLNUsuario)throw(runtime_er
         }else{
             cout << "Opcao invalida!" << endl;
         }
-    
+
     }
 
 
@@ -330,19 +331,25 @@ void ComandoIUUsuarioTrocar::executar(ILNUsuario* cntrLNUsuario)throw(runtime_er
     if(opcao == 1){
         resultado = cntrLNUsuario->trocar(titulo, 1);
     }else{
-        resultado = cntrLNUsuario->trocar(titulo, 2); 
+        resultado = cntrLNUsuario->trocar(titulo, 2);
     }
-    
+
 
     if((resultado.getValor() == Resultado::SUCESSO)&&(opcao == 2)){
-         cout << "Sucesso na execucao da operacao" << endl;
-         cout << "Foi encontrado um usuario que possui o livro para troca" << endl;
-         cout << "Livro    - " << titulo.getTitulo() << endl;
-         cout << "Nome     - " << resultado.getUsuario().getNome().getNome() << endl;
-         cout << "Apelido  - " << resultado.getUsuario().getApelido().getApelido() << endl;
-         cout << "Telefone - " << resultado.getUsuario().getTelefone().getTelefone() << endl;
+        Usuario usuario;
+        Exemplar exemplar;
+        cout << "Sucesso na execucao da operacao" << endl;
+        cout << "Foram encontrados usuarios que possuem o livro para troca" << endl;
+        while(!exemplarTrocaGlobal.empty()){
+            
+            cout << "Livro    - " << titulo.getTitulo() << endl;
+            cout << "Nome     - " << usuario.getNome().getNome() << endl;
+            cout << "Apelido  - " << usuario.getApelido().getApelido() << endl;
+            cout << "Telefone - " << usuario.getTelefone().getTelefone() << endl; 
+        }
+         
     }
-    else {
+    else if(resultado.getValor() == Resultado::FALHA){
         cout << "Falha na execucao da operacao" << endl;
     }
     system("PAUSE");

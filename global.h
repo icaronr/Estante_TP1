@@ -3,7 +3,9 @@
 
 #include "dominios.h"
 #include "entidades.h"
+#include <list>
 
 extern Usuario usuarioAtual;
+extern list <Exemplar> exemplarTrocaGlobal;
 
 #endif // GLOBAL_H_INCLUDED
