@@ -440,7 +440,7 @@
 1511142935 source:d:\downloads\unb\tp1\lista 3\global.cpp
 	"global.h"
 
-1511224650 source:d:\downloads\unb\tp1\estante_tp1\comandos.cpp
+1511273246 source:d:\downloads\unb\tp1\estante_tp1\comandos.cpp
 	"comandos.h"
 
 1511201912 d:\downloads\unb\tp1\estante_tp1\comandos.h
@@ -484,7 +484,7 @@
 	<cstdlib>
 	<list>
 
-1511221596 d:\downloads\unb\tp1\estante_tp1\unidadepersistencia.h
+1511269734 d:\downloads\unb\tp1\estante_tp1\unidadepersistencia.h
 	"dominios.h"
 	"entidades.h"
 	<list>
@@ -590,13 +590,14 @@
 1511196210 source:d:\downloads\unb\tp1\estante_tp1\stubs.cpp
 	"stubs.h"
 
-1511227771 source:d:\downloads\unb\tp1\estante_tp1\controladoras.cpp
+1511281852 source:d:\downloads\unb\tp1\estante_tp1\controladoras.cpp
 	"controladoras.h"
 	"comandos.h"
 	"interfaces.h"
 	"global.h"
+	<limits>
 
-1511227361 source:d:\downloads\unb\tp1\estante_tp1\unidadepersistencia.cpp
+1511271323 source:d:\downloads\unb\tp1\estante_tp1\unidadepersistencia.cpp
 	"unidadePersistencia.h"
 	"stdlib.h"
 

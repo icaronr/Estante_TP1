@@ -3,6 +3,8 @@
 #include "interfaces.h"
 #include "global.h"
 
+#include<limits>
+
 // Definições de métodos da classe CntrIUAutenticacao.
 ///Este metodo realiza o contato com o usuario para solicitar seus dados para autenticacao.
 ///Primeiro utiliza os servicos de entrada e saida no console para solicitar apelido e senha.
@@ -132,16 +134,26 @@ void CntrIUUsuario::executar(const Apelido &apelido) throw(runtime_error){
 
         cout << endl << "Gerenciamento de Usuario." << endl << endl;
 
-        cout << "Incluir Livro       - " << INCLUIR << endl;
-        cout << "Remover Livro       - " << REMOVER << endl;
-        cout << "Consultar Livro     - " << CONSULTAR << endl;
-        cout << "Escrever Resenha    - " << ESCREVER << endl;
-        cout << "Pesquisar Usuario   - " << PESQUISAR << endl;
-        cout << "Trocar Livro        - " << TROCAR << endl;
-        cout << "Retornar            - " << RETORNAR << endl << endl;
+        cout << "Incluir Livro na estante  - " << INCLUIR << endl;
+        cout << "Remover Livro da estante  - " << REMOVER << endl;
+        cout << "Consultar dados de Livro  - " << CONSULTAR << endl;
+        cout << "Escrever Resenha          - " << ESCREVER << endl;
+        cout << "Pesquisar Usuario         - " << PESQUISAR << endl;
+        cout << "Trocar Livro              - " << TROCAR << endl;
+        cout << "Sair do programa          - " << RETORNAR << endl << endl;
         cout << "Selecione uma opcao :";
 
-        cin >> opcao;
+
+            //Sincroniza o buffer para evitar loops
+            cin.sync();
+            cin >> opcao;
+            while(cin.fail()){
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(),'\n');
+                cout << endl << "Entrada invalida!" << endl << "Informe uma nova opcao: " << endl;
+                cin >> opcao;
+
+            }
 
         switch(opcao){
             case INCLUIR:   comando = new ComandoIUUsuarioIncluir();
@@ -209,10 +221,10 @@ Resultado CntrLNAutenticacao::autenticar(const Apelido &apelido, const Senha &se
         string senhaRecuperada;
 
         senhaRecuperada = comandoLerSenha.getResultado();
-        
+
         //Compara a senha do banco com a senha informada
         if(senhaRecuperada == senha.getSenha()){
-           
+
             resultado.setValor(ResultadoAutenticacao::SUCESSO);
 
             ComandoPesquisarUsuario comandoPesquisarUsuario(apelido);
@@ -292,10 +304,18 @@ Resultado CntrLNUsuario::incluir(const Livro &livro) throw(runtime_error){
     ComandoPesquisarExemplar comandoPesquisarExemplar(usuarioAtual.getApelido());
 
         comandoPesquisarExemplar.executar();
+        cout << endl << "EU PASSEI" << endl;
         int j = 0;
         while(true){
+
+                cout << endl << "EU PASSEII" << endl;
             try{
-                usuarioAtual.setEstante(comandoPesquisarExemplar.getResultado(), j);
+                Exemplar exemplarRecuperado;
+                exemplarRecuperado = comandoPesquisarExemplar.getResultado();
+                cout << endl <<" Apelido -> " << usuarioAtual.getApelido().getApelido() << "  Codigo do livro -> " << exemplarRecuperado.getCodigo().getCodigo() << " J -> " << j << endl;
+                usuarioAtual.setEstante(exemplarRecuperado, j);
+
+        cout << endl << "EU PASSEIII" << endl;
                 j++;
                 if(j>9){
                     resultado.setValor(Resultado::FALHA);
@@ -310,8 +330,9 @@ Resultado CntrLNUsuario::incluir(const Livro &livro) throw(runtime_error){
             }
 
         }
-        
+
         //Agora testa se o usuario ja possui um exemplar desse livro na estante
+
         int i;
         for(i=0; i<j; i++){
             if(usuarioAtual.getEstante(i).getCodigo().getCodigo() == livro.getCodigo().getCodigo()){
@@ -324,11 +345,12 @@ Resultado CntrLNUsuario::incluir(const Livro &livro) throw(runtime_error){
 
     try{
         //Confere se o livro ja esta cadastrado
+
         ComandoPesquisarLivro comandoPesquisarLivro(livro.getCodigo());
         comandoPesquisarLivro.executar();
         Livro livroRecuperado;
         livroRecuperado = comandoPesquisarLivro.getResultado();
-         
+
         //Se encontrar o livro, cadastra o exemplar vinculado ao usuario
 
     }
@@ -336,17 +358,27 @@ Resultado CntrLNUsuario::incluir(const Livro &livro) throw(runtime_error){
         //Se não encontrar o livro, cadastra o livro no banco de dados
         cout << endl <<"Livro ainda nao cadastrado no sistema, cadastrando..." << endl;
         ComandoCadastrarLivro comandoCadastrarLivro(livro);
+        cout << endl << "Dados recebidos..." << endl;
         comandoCadastrarLivro.executar();
-    
-    }
-    
-    //Faz o cadastro do exemplar. A chave de troca é sempre inicializada em '0'.
-    exemplar.setApelido(usuarioAtual.getApelido());
-    exemplar.setCodigo(livro.getCodigo());
+        cout << endl << "Livro cadastrado!" << endl;
 
+    }
+
+    //Faz o cadastro do exemplar. A chave de troca é sempre inicializada em '0'.
+    cout << endl <<"Cadastrando exemplar..." << endl;
+    exemplar.setApelido(usuarioAtual.getApelido());
+    cout << endl << "Apelido salvo..." << endl;
+    exemplar.setCodigo(livro.getCodigo());
+    cout << endl << "Codigo salvo..." << endl;
+    Troca troca;
+    troca.setTroca("0");
+    exemplar.setTroca(troca);
+    cout << endl << "Dado de troca salvo..." << endl;
+    cout << endl << "Dados recebidos..." << endl;
     ComandoCadastrarExemplar comandoCadastrarExemplar(exemplar);
+
     comandoCadastrarExemplar.executar();
-    cout << endl << "EU PASSEII" << endl;
+    cout << endl << "Exemplar cadastrado!" << endl;
     resultado.setValor(Resultado::SUCESSO);
 
     return resultado;
@@ -393,7 +425,7 @@ ResultadoLivro CntrLNUsuario::consultar(const Codigo &codigo) throw(runtime_erro
 
     // Apresentar dados recebidos.
     Livro livroRecuperado;
-      
+
 
     cout << endl << "CntrLNUsuario::consultar" << endl ;
 
@@ -476,6 +508,7 @@ ResultadoUsuario CntrLNUsuario::pesquisar(const Apelido &apelido) throw(runtime_
     }
     catch(EErroPersistencia exp){
         resultado.setValor(Resultado::FALHA);
+        cout << endl << "Usuario nao encontrado." << endl;
     }
 
     return resultado;
@@ -517,6 +550,34 @@ ResultadoUsuario CntrLNUsuario::trocar(const Titulo &titulo, const int operacao)
     exemplar.setTroca(troca);
 
     if(operacao == 1){
+        try{
+            Exemplar exemplarRecuperado;
+/*ComandoPesquisarExemplar comandoPesquisarExemplar(livroRecuperado.getCodigo());
+            comandoPesquisarExemplar.executar();
+            exemplarRecuperado = comandoPesquisarExemplar.getResultado*/
+            for(int i = 0; i<10; i++){
+                exemplarRecuperado = usuarioAtual.getEstante(i);
+                if(exemplarRecuperado.getCodigo().getCodigo() == livroRecuperado.getCodigo().getCodigo()){
+                    ComandoAtualizarExemplar comandoAtualizarExemplar(exemplar);
+                    comandoAtualizarExemplar.executar();
+                    resultado.setValor(Resultado::SUCESSO);
+                    return resultado;
+
+                }
+
+
+            }
+            cout << endl << "O livro nao esta presente na sua estante!" << endl;
+            resultado.setValor(Resultado::FALHA);
+            return resultado;
+
+        }
+        catch(EErroPersistencia exp){
+            cout << endl << "O livro nao esta presente na sua estante!" << endl;
+            resultado.setValor(Resultado::FALHA);
+            return resultado;
+        }
+
         ComandoAtualizarExemplar comandoAtualizarExemplar(exemplar);
         comandoAtualizarExemplar.executar();
         resultado.setValor(Resultado::SUCESSO);

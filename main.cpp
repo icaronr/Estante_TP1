@@ -6,6 +6,7 @@
 
 #include <iostream>
 #include <stdlib.h>
+#include <limits>
 
 #include "dominios.h"
 #include "entidades.h"
@@ -47,11 +48,21 @@ int main()
     while(true){
         int opcao = 0;
         // Simula a tela de apresentacao (tela inicial) de sistema.
+        system("cls");
         cout << endl << "Tela de apresentacao de sistema." << endl;
         cout << "Seja Bem-Vindo!" << endl;
         cout << endl << "1 - Cadastrar" << endl;
         cout << "2 - Autenticar" << endl;
-        cin >> opcao;
+         //Sincroniza o buffer para evitar loops
+            cin.sync();
+            cin >> opcao;
+            while(cin.fail()){
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(),'\n');
+                cout << endl << "Entrada invalida!" << endl << "Informe uma nova opcao: " << endl;
+                cin >> opcao;
+
+            }
 
         if (opcao == 1){
              try{
@@ -76,6 +87,9 @@ int main()
             catch(const runtime_error &exp){
                      cout << "Erro de sistema." << endl;
             }
+        }else{
+            cout << endl << "Entrada invalida!" << endl;
+            getch();
         }
 
 

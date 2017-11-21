@@ -426,8 +426,8 @@ ComandoCadastrarExemplar::ComandoCadastrarExemplar(Exemplar exemplar) {
         comandoSQL = "INSERT INTO EXEMPLARES VALUES (";
         comandoSQL += "'" + exemplar.getApelido().getApelido() + "', ";
         comandoSQL += "'" + exemplar.getCodigo().getCodigo() + "', ";
-        comandoSQL += "'" + '0';
-        comandoSQL += "'); ";
+        comandoSQL += exemplar.getTroca().getTroca();
+        comandoSQL += "); ";
 }
 
 //---------------------------------------------------------------------------

@@ -302,6 +302,8 @@ void ComandoIUUsuarioTrocar::executar(ILNUsuario* cntrLNUsuario)throw(runtime_er
             cout << "1 - Indicar troca" << endl;
             cout << "2 - Procurar livros para troca" << endl;
             cout << "3 - Voltar ao menu principal" << endl;
+            //Sincroniza o buffer para evitar loops        
+            cin.sync();
             cin >> opcao;
         if(opcao == 1){
             string tituloTroca;
