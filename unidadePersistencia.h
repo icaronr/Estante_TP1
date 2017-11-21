@@ -82,6 +82,10 @@ public:
 
 //---------------------------------------------------------------------------
 //Classe ComandoLerSenha.
+///A classe "ComandoLerSenha" é essencial ao processo de autenticação. O método "ComandoLerSenha" 
+///recebe o nome de usuário fornecido e por meio de comandos SQL, acessa a senha daquele usuário.
+///O comando "getResultado" quando não encontra erros retorna a senha do usuario. Quando não
+///consegue encontrar a senha para o nome de usuário fornecido, retorna uma mensagem de erro.
 
 class ComandoLerSenha:public ComandoSQL {
 public:
