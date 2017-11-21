@@ -142,9 +142,7 @@ void ComandoIUUsuarioConsultar::executar(ILNUsuario* cntrLNUsuario)throw(runtime
 
     while(true){
             system("CLS");
-            cout << "CODIGO_SUCESSO       - " << Codigo::CODIGO_SUCESSO << endl;
-            cout << "CODIGO_FALHA         - " << Codigo::CODIGO_FALHA << endl;
-            cout << "CODIGO_ERRO_SISTEMA  - " << Codigo::CODIGO_ERRO_SISTEMA << endl;
+            
         try{
             string codigoDoLivro;
             cout << "Digite o codigo do livro: ";
@@ -169,8 +167,10 @@ void ComandoIUUsuarioConsultar::executar(ILNUsuario* cntrLNUsuario)throw(runtime
         Livro livro;
         livro = resultado.getLivro();
          cout << "Sucesso na execucao da operacao" << endl;
-         cout << "Titulo           - " << livro.getTitulo().getTitulo() << endl;
          cout << "Codigo           - " << livro.getCodigo().getCodigo() << endl;
+         cout << "Titulo           - " << livro.getTitulo().getTitulo() << endl;
+         cout << "Autor            - " << livro.getAutor().getAutor() << endl;
+         cout << "Data             - " << livro.getData().getData() << endl;
          cout << "Genero Literario - " << livro.getGeneroLiterario().getGeneroLiterario() << endl;
     }
     else {

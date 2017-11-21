@@ -207,13 +207,18 @@ Resultado CntrLNAutenticacao::autenticar(const Apelido &apelido, const Senha &se
     try{
         comandoLerSenha.executar();
         string senhaRecuperada;
-        senhaRecuperada = comandoLerSenha.getResultado();
 
+        senhaRecuperada = comandoLerSenha.getResultado();
+        
         //Compara a senha do banco com a senha informada
         if(senhaRecuperada == senha.getSenha()){
+           
             resultado.setValor(ResultadoAutenticacao::SUCESSO);
+
             ComandoPesquisarUsuario comandoPesquisarUsuario(apelido);
+            comandoPesquisarUsuario.executar();
             usuarioAtual = comandoPesquisarUsuario.getResultado();
+
         }else{
             resultado.setValor(ResultadoAutenticacao::FALHA);
             cout << endl << "Senha digitada diferente da cadastrada.";
@@ -225,7 +230,7 @@ Resultado CntrLNAutenticacao::autenticar(const Apelido &apelido, const Senha &se
     }
     catch(EErroPersistencia exp) {
                         cout << endl << exp.what();
-                        cout << endl << endl << "Digite algo para continuar.";
+                        cout << endl << endl << "Digite uma tecla para continuar.";
                         getch();
     }
 
@@ -381,35 +386,24 @@ Resultado CntrLNUsuario::remover(const Codigo &codigo) throw(runtime_error) {
 ResultadoLivro CntrLNUsuario::consultar(const Codigo &codigo) throw(runtime_error) {
 
     // Apresentar dados recebidos.
-    Livro livro;
-    GeneroLiterario genero;
-    genero.setGeneroLiterario(GeneroLiterario::GENERO_FALHA);
-    Titulo titulo;
-    titulo.setTitulo(Titulo::TITULO_FALHA);
+    Livro livroRecuperado;
+      
 
     cout << endl << "CntrLNUsuario::consultar" << endl ;
 
     ResultadoLivro resultado;
-
-
-
-    // A seguir devem ser implementados os diferentes comportamentos.
-
-    // Sucesso.
-    if(codigo.getCodigo() == Codigo::CODIGO_SUCESSO){
-        resultado.setValor(Resultado::SUCESSO);
-        livro.setCodigo(codigo);
-        livro.setTitulo(titulo);
-        livro.setGeneroLiterario(genero);
-        resultado.setLivro(livro);
-    }else if(codigo.getCodigo() == Codigo::CODIGO_ERRO_SISTEMA){// Erro de sistema.
-        throw runtime_error("Erro de sistema");
-    }else{ // Falha.
-        resultado.setValor(Resultado::SUCESSO);
+    ComandoPesquisarLivro comandoPesquisarLivro(codigo);
+    try{
+        comandoPesquisarLivro.executar();
+        livroRecuperado = comandoPesquisarLivro.getResultado();
     }
-
-
-
+    catch(EErroPersistencia exp){
+        cout << endl <<"Livro nao encontrado no sistema." << endl;
+        resultado.setValor(Resultado::FALHA);
+        return resultado;
+    }
+        resultado.setLivro(livroRecuperado);
+        resultado.setValor(Resultado::SUCESSO);
 
     return resultado;
 }

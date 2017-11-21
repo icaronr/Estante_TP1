@@ -74,7 +74,8 @@ int ComandoSQL::callback(void *NotUsed, int argc, char **valorColuna, char **nom
 ComandoLerSenha::ComandoLerSenha(Usuario usuario) {
         comandoSQL = "SELECT senha FROM usuarios WHERE apelido = ";
         comandoSQL += usuario.getApelido().getApelido();
-        comandoSQL += ";";
+        
+        //comandoSQL += ";";
 }
 
 string ComandoLerSenha::getResultado() throw (EErroPersistencia) {
