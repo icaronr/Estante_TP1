@@ -508,9 +508,10 @@
 1511199643 source:d:\downloads\unb\tp1\estante_tp1\global.cpp
 	"global.h"
 
-1511196209 source:d:\downloads\unb\tp1\estante_tp1\main.cpp
+1511283087 source:d:\downloads\unb\tp1\estante_tp1\main.cpp
 	<iostream>
 	<stdlib.h>
+	<limits>
 	"dominios.h"
 	"entidades.h"
 	"testes.h"

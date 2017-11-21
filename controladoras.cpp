@@ -295,7 +295,7 @@ Resultado CntrLNAutenticacao::cadastrar(const Usuario &usuario) throw(runtime_er
 Resultado CntrLNUsuario::incluir(const Livro &livro) throw(runtime_error){
 
     // Apresentar dados recebidos.
-
+    int cadastrouLivro = 0;
     cout << endl << "CntrLNUsuario::incluir" << endl ;
 
     Resultado resultado;
@@ -304,18 +304,15 @@ Resultado CntrLNUsuario::incluir(const Livro &livro) throw(runtime_error){
     ComandoPesquisarExemplar comandoPesquisarExemplar(usuarioAtual.getApelido());
 
         comandoPesquisarExemplar.executar();
-        cout << endl << "EU PASSEI" << endl;
+
         int j = 0;
         while(true){
 
-                cout << endl << "EU PASSEII" << endl;
             try{
                 Exemplar exemplarRecuperado;
                 exemplarRecuperado = comandoPesquisarExemplar.getResultado();
-                cout << endl <<" Apelido -> " << usuarioAtual.getApelido().getApelido() << "  Codigo do livro -> " << exemplarRecuperado.getCodigo().getCodigo() << " J -> " << j << endl;
                 usuarioAtual.setEstante(exemplarRecuperado, j);
 
-        cout << endl << "EU PASSEIII" << endl;
                 j++;
                 if(j>9){
                     resultado.setValor(Resultado::FALHA);
@@ -325,7 +322,7 @@ Resultado CntrLNUsuario::incluir(const Livro &livro) throw(runtime_error){
 
             }
             catch(EErroPersistencia exp){
-                cout << "Estante processada!"<< endl;
+                cout << "Estante processada com sucesso!"<< endl;
                 break;
             }
 
@@ -361,6 +358,7 @@ Resultado CntrLNUsuario::incluir(const Livro &livro) throw(runtime_error){
         cout << endl << "Dados recebidos..." << endl;
         comandoCadastrarLivro.executar();
         cout << endl << "Livro cadastrado!" << endl;
+        cadastrouLivro = 1;
 
     }
 
@@ -375,10 +373,25 @@ Resultado CntrLNUsuario::incluir(const Livro &livro) throw(runtime_error){
     exemplar.setTroca(troca);
     cout << endl << "Dado de troca salvo..." << endl;
     cout << endl << "Dados recebidos..." << endl;
+    try{
+
     ComandoCadastrarExemplar comandoCadastrarExemplar(exemplar);
 
     comandoCadastrarExemplar.executar();
     cout << endl << "Exemplar cadastrado!" << endl;
+    }
+    catch(EErroPersistencia exp){
+        cout << endl << "Erro ao cadastrar o exemplar!" << endl;
+        if(cadastrouLivro){
+            ComandoRemoverLivro comandoRemoverLivro(exemplar.getCodigo());
+            comandoRemoverLivro.executar();
+        }
+
+
+        resultado.setValor(Resultado::FALHA);
+        return resultado;
+    }
+
     resultado.setValor(Resultado::SUCESSO);
 
     return resultado;
