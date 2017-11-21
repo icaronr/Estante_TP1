@@ -51,8 +51,8 @@ ResultadoAutenticacao CntrIUAutenticacao::autenticar() throw(runtime_error) {
             break;
         }
 
-
     }
+    getch();
     return resultadoAutenticacao;
 }
 
@@ -310,6 +310,7 @@ Resultado CntrLNUsuario::incluir(const Livro &livro) throw(runtime_error){
             }
 
         }
+        
         //Agora testa se o usuario ja possui um exemplar desse livro na estante
         int i;
         for(i=0; i<j; i++){
@@ -320,27 +321,32 @@ Resultado CntrLNUsuario::incluir(const Livro &livro) throw(runtime_error){
             }
         }
     Exemplar exemplar;
+
     try{
         //Confere se o livro ja esta cadastrado
         ComandoPesquisarLivro comandoPesquisarLivro(livro.getCodigo());
         comandoPesquisarLivro.executar();
         Livro livroRecuperado;
         livroRecuperado = comandoPesquisarLivro.getResultado();
+         
         //Se encontrar o livro, cadastra o exemplar vinculado ao usuario
 
     }
     catch(EErroPersistencia exp){
         //Se não encontrar o livro, cadastra o livro no banco de dados
+        cout << endl <<"Livro ainda nao cadastrado no sistema, cadastrando..." << endl;
         ComandoCadastrarLivro comandoCadastrarLivro(livro);
         comandoCadastrarLivro.executar();
-
+    
     }
+    
     //Faz o cadastro do exemplar. A chave de troca é sempre inicializada em '0'.
     exemplar.setApelido(usuarioAtual.getApelido());
     exemplar.setCodigo(livro.getCodigo());
+
     ComandoCadastrarExemplar comandoCadastrarExemplar(exemplar);
     comandoCadastrarExemplar.executar();
-
+    cout << endl << "EU PASSEII" << endl;
     resultado.setValor(Resultado::SUCESSO);
 
     return resultado;

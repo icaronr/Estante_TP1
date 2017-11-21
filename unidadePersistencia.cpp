@@ -73,9 +73,8 @@ int ComandoSQL::callback(void *NotUsed, int argc, char **valorColuna, char **nom
 
 ComandoLerSenha::ComandoLerSenha(Usuario usuario) {
         comandoSQL = "SELECT senha FROM usuarios WHERE apelido = ";
-        comandoSQL += usuario.getApelido().getApelido();
-        
-        //comandoSQL += ";";
+        comandoSQL += "'"+ usuario.getApelido().getApelido()+ "'";
+        comandoSQL += ";";
 }
 
 string ComandoLerSenha::getResultado() throw (EErroPersistencia) {
@@ -97,7 +96,7 @@ string ComandoLerSenha::getResultado() throw (EErroPersistencia) {
 
 ComandoPesquisarUsuario::ComandoPesquisarUsuario(Apelido apelido) {
         comandoSQL = "SELECT * FROM usuarios WHERE apelido = ";
-        comandoSQL += apelido.getApelido();
+        comandoSQL += "'" + apelido.getApelido() + "'";
         comandoSQL += ";";
 }
 
@@ -163,7 +162,7 @@ ComandoCadastrarUsuario::ComandoCadastrarUsuario(Usuario usuario) {
 
 ComandoRemoverUsuario::ComandoRemoverUsuario(Apelido apelido) {
         comandoSQL = "DELETE FROM USUARIOS WHERE APELIDO = ";
-        comandoSQL += apelido.getApelido();
+        comandoSQL += "'" + apelido.getApelido() + "'";
         comandoSQL += ";";
 }
 
@@ -184,13 +183,13 @@ ComandoAtualizarUsuario::ComandoAtualizarUsuario(Usuario usuario) {
 
 ComandoPesquisarLivro::ComandoPesquisarLivro(Codigo codigo) {
         comandoSQL = "SELECT * FROM livros WHERE codigo = ";
-        comandoSQL += codigo.getCodigo();
+        comandoSQL += "'" + codigo.getCodigo() + "'";
         comandoSQL += ";";
 }
 
 ComandoPesquisarLivro::ComandoPesquisarLivro(Titulo titulo) {
         comandoSQL = "SELECT * FROM livros WHERE titulo = ";
-        comandoSQL += titulo.getTitulo();
+        comandoSQL += "'" + titulo.getTitulo() + "'";
         comandoSQL += ";";
 }
 
@@ -265,7 +264,7 @@ ComandoCadastrarLivro::ComandoCadastrarLivro(Livro livro) {
 
 ComandoRemoverLivro::ComandoRemoverLivro(Codigo codigo) {
         comandoSQL = "DELETE FROM LIVROS WHERE CODIGO = ";
-        comandoSQL += codigo.getCodigo();
+        comandoSQL += "'" + codigo.getCodigo() + "'";
         comandoSQL += ";";
 }
 
@@ -287,13 +286,13 @@ ComandoAtualizarLivro::ComandoAtualizarLivro(Livro livro) {
 
 ComandoPesquisarResenha::ComandoPesquisarResenha(Codigo codigo) {
         comandoSQL = "SELECT * FROM resenhas WHERE codigo = ";
-        comandoSQL += codigo.getCodigo();
+        comandoSQL += "'" + codigo.getCodigo() + "'";
         comandoSQL += ";";
 }
 
 ComandoPesquisarResenha::ComandoPesquisarResenha(Apelido apelido) {
         comandoSQL = "SELECT * FROM resenhas WHERE apelido = ";
-        comandoSQL += apelido.getApelido();
+        comandoSQL += "'" + apelido.getApelido() + "'";
         comandoSQL += ";";
 }
 
@@ -351,7 +350,7 @@ ComandoCadastrarResenha::ComandoCadastrarResenha(Resenha resenha) {
 
 ComandoRemoverResenha::ComandoRemoverResenha(Codigo codigo) {
         comandoSQL = "DELETE FROM RESENHAS WHERE CODIGO = ";
-        comandoSQL += codigo.getCodigo();
+        comandoSQL += "'" + codigo.getCodigo() + "'";
         comandoSQL += ";";
 }
 
@@ -373,13 +372,13 @@ ComandoAtualizarResenha::ComandoAtualizarResenha(Resenha resenha) {
 
 ComandoPesquisarExemplar::ComandoPesquisarExemplar(Codigo codigo) {
         comandoSQL = "SELECT * FROM exemplares WHERE codigo = ";
-        comandoSQL += codigo.getCodigo();
+        comandoSQL += "'" + codigo.getCodigo() + "'";
         comandoSQL += ";";
 }
 
 ComandoPesquisarExemplar::ComandoPesquisarExemplar(Apelido apelido) {
         comandoSQL = "SELECT * FROM exemplares WHERE apelido = ";
-        comandoSQL += apelido.getApelido();
+        comandoSQL += "'" + apelido.getApelido() + "'";
         comandoSQL += ";";
 }
 
@@ -436,7 +435,7 @@ ComandoCadastrarExemplar::ComandoCadastrarExemplar(Exemplar exemplar) {
 
 ComandoRemoverExemplar::ComandoRemoverExemplar(Codigo codigo) {
         comandoSQL = "DELETE FROM EXEMPLARES WHERE CODIGO = ";
-        comandoSQL += codigo.getCodigo();
+        comandoSQL += "'" + codigo.getCodigo() + "'";
         comandoSQL += ";";
 }
 
