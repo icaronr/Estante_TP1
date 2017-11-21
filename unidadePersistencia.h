@@ -45,12 +45,18 @@ private:
 public:
         void setNomeColuna(const string&);
         string getNomeColuna() const;
+
         void setValorColuna(const string&);
         string getValorColuna() const;
 };
 
 //---------------------------------------------------------------------------
 //Classe ComandoSQL.
+///A classe "ComandoSQL" define os métodos de conexão do programa com o banco de dados gerado
+///com a utilização do SQLite. Os métodos privados "conectar" e "desconectar" realizam a tentativa
+///de abertura do banco de dados, retornando mensagem de erro em caso de falha.
+///O método público "ComandoSQL" informa o nome do banco de dados.
+/// --- método executar ---
 
 class ComandoSQL {
 private:
