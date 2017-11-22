@@ -92,26 +92,58 @@ public:
     }
 };
 
-/// Declaração de classe controladora de serviços da interface ILNAutenticacao.
+/// Classe controladora de serviços da interface de autenticação a nível de negócio.
 
 class CntrLNAutenticacao:public ILNAutenticacao{
 
 public:
 
-    /// Declaração de método previsto na interface.
+    /**
+    * Método que realiza a etapa de interface com usuário do cadastro. Recebe como parâmetro
+    * um objeto "usuario". Solicita ao usuário a entrada de um apelido e senha. O objeto "usuario"
+    * é preenchido com esses dados e passado como parâmetro para o comando de pesquisa de usuário.
+    * Se o comando de pesquisa encontra usuário com esses dados, o método informa que o nome está em uso.
+    * Caso contrário o usuário é cadastrado. O método retorna o resultado do cadastro.
+    */
     Resultado cadastrar(const Usuario&) throw(runtime_error);
+    
+    /**
+    * Método que realiza a etapa de interface com usuário da autenticação. Recebe como parâmetro
+    * um objeto "usuario". Solicita ao usuário a entrada de um apelido e senha. O objeto "usuario"
+    * é preenchido com esses dados e passado como parâmetro para o comando de pesquisa de usuário.
+    * Se o comando de pesquisa encontra usuário com esses dados, o usuário é autenticado.
+    * Caso contrário o usuário é cadastrado. O método retorna o resultado da autenticação.
+    */
     Resultado autenticar(const Apelido&, const Senha&) throw(runtime_error);
 
 };
 
-/// Declaração de classe controladora de serviços da interface ILNUsuario.
+/// Classe controladora dos serviços disponíveis ao usuário após a autenticação.
 
 class CntrLNUsuario:public ILNUsuario{  // classe implementa a interface.
 
 public:
 
-    ///declaracoes dos metodos previstos na interface
+    /**
+    * Método responsável por incluir um livro na estante do usuário. 
+    * Recebe como parâmetro um objeto "livro". Pesquisa se o usuario, armazenado em
+    * "usuarioAtual" atingiu o limite de livros na biblioteca. Se sim, retorna esse resultado
+    * sem incluir o livro.
+    * Pesquisa se o usuario já posusi um exemplar daquele livro na estante virtual. Se sim, 
+    * retorna esse resultado sem incluir o livro. 
+    * Na negativa dos dois casos acima, consulta se o livro já está cadastrado.
+    * Caso contrário, cadastra o exemplar. Se há erro ao cadastrar o exemplar, retorna.
+    * No sucesso do cadastro, retorna o resultado de sucesso.
+    */
     Resultado incluir(const Livro&) throw(runtime_error);
+    
+    /**
+    * Método responsável por remover um livro da estante do usuário. 
+    * Recebe como parâmetro um objeto "codigo". Pesquisa o livro na estante do usuário,
+    * armazenando-o em "livroRecuperado. Caso não encontre, retorna mensagem de erro e o
+    * resultado negativo.
+    * Executa o comando de remoção do livro e retorna o resultado da remoção.
+    */
     Resultado remover(const Codigo&) throw(runtime_error);
     ResultadoLivro consultar(const Codigo&) throw(runtime_error);
     ResultadoResenha escrever(const Titulo&, const Texto&, const Data&) throw(runtime_error);
