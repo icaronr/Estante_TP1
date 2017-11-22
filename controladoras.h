@@ -149,6 +149,11 @@ public:
     ResultadoResenha escrever(const Titulo&, const Texto&, const Data&) throw(runtime_error);
     ResultadoUsuario pesquisar(const Apelido&) throw(runtime_error);
     ResultadoUsuario trocar(const Titulo&, const int) throw(runtime_error);
+    /**
+    *Método responsável por recuperar os dados acerca da estante do usuário atual.
+    *Carrega os exemplares encontrados no banco de dados que possuem o apelido do usuario
+    */
+    Resultado contabilizar() throw(runtime_error);
 };
 
 

@@ -283,8 +283,9 @@ Resultado CntrLNUsuario::incluir(const Livro &livro) throw(runtime_error){
     cout << endl << "CntrLNUsuario::incluir" << endl ;
 
     Resultado resultado;
-
+    resultado = (CntrLNUsuario::contabilizar());
      //Primeiro confirmaremos se o usuario ainda não atingiu o limite de livros na biblioteca
+    /*
     ComandoPesquisarExemplar comandoPesquisarExemplar(usuarioAtual.getApelido());
 
         comandoPesquisarExemplar.executar();
@@ -317,12 +318,14 @@ Resultado CntrLNUsuario::incluir(const Livro &livro) throw(runtime_error){
             }
 
         }
+        */
         cout << usuarioAtual.getUnidades().getUnidades() << endl;
         getch();
 
         //Agora testa se o usuario ja possui um exemplar desse livro na estante
 
         int i;
+        int j = usuarioAtual.getUnidades().getUnidades();
         for(i=0; i<j; i++){
             if(usuarioAtual.getEstante(i).getCodigo().getCodigo() == livro.getCodigo().getCodigo()){
                 resultado.setValor(Resultado::FALHA);
@@ -612,3 +615,38 @@ ResultadoUsuario CntrLNUsuario::trocar(const Titulo &titulo, const int operacao)
     return resultado;
 }
 
+Resultado CntrLNUsuario::contabilizar() throw(runtime_error){
+    Resultado resultado;
+    ComandoPesquisarExemplar comandoPesquisarExemplar(usuarioAtual.getApelido());
+
+    comandoPesquisarExemplar.executar();
+
+    int j = 0;
+    Unidades unidades;
+    while(true){
+
+        try{
+
+            Exemplar exemplarRecuperado;
+            exemplarRecuperado = comandoPesquisarExemplar.getResultado();
+            usuarioAtual.setEstante(exemplarRecuperado, j);
+
+            j++;
+            if(j>9){
+                unidades.setUnidades(10);
+                usuarioAtual.setUnidades(unidades);
+                resultado.setValor(Resultado::SUCESSO);
+                return resultado;
+            }
+
+        }
+        catch(EErroPersistencia exp){
+            unidades.setUnidades(j);
+            usuarioAtual.setUnidades(unidades);
+            resultado.setValor(Resultado::SUCESSO);
+            break;
+        }
+
+    }
+    return resultado;
+}

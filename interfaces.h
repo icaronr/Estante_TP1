@@ -102,6 +102,7 @@ public:
     virtual ResultadoResenha escrever(const Titulo&, const Texto&, const Data&) throw(runtime_error) = 0;
     virtual ResultadoUsuario pesquisar(const Apelido&) throw(runtime_error) = 0;
     virtual ResultadoUsuario trocar(const Titulo&, const int) throw(runtime_error) = 0;
+    virtual Resultado contabilizar() throw(runtime_error) = 0;
 };
 
 // Declaração de interface para o serviço de gerente na camada de negócio.

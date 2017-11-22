@@ -8,6 +8,5 @@
 
 extern Usuario usuarioAtual;
 extern list <Exemplar> exemplarTrocaGlobal;
-extern void contabilizar();
 
 #endif // GLOBAL_H_INCLUDED
