@@ -5,12 +5,6 @@
 
 #include<limits>
 
-// Definições de métodos da classe CntrIUAutenticacao.
-///Este metodo realiza o contato com o usuario para solicitar seus dados para autenticacao.
-///Primeiro utiliza os servicos de entrada e saida no console para solicitar apelido e senha.
-///Em seguida envia para a autenticacao no servico de logica de negocio ("cntrLNAutenticacao->autenticar()").
-///O metodo determina se a autenticacao falhou (resultado = 1) ou obteve sucesso (resultado = 0).
-///Retorna um objeto do tipo ResultadoAutenticacao com o apelido do usuario que tentou o acesso e o resultado da solicitacao.
 ResultadoAutenticacao CntrIUAutenticacao::autenticar() throw(runtime_error) {
 
     ResultadoAutenticacao resultadoAutenticacao;
@@ -37,11 +31,11 @@ ResultadoAutenticacao CntrIUAutenticacao::autenticar() throw(runtime_error) {
             }
         }
 
-        // Solicitar autenticação.
+        // Solicitar autenticaÃ§Ã£o.
 
         resultado = cntrLNAutenticacao->autenticar(apelido, senha);
 
-        // Informar resultado da autenticação.
+        // Informar resultado da autenticaÃ§Ã£o.
 
         if(resultado.getValor() == ResultadoAutenticacao::FALHA){
             cout << endl << "Falha na autenticacao." << endl;
@@ -80,7 +74,7 @@ ResultadoAutenticacao CntrIUAutenticacao::cadastrar() throw(runtime_error) {
                 cout << "Digite a senha (4 letras sem repeticao): ";
                 cin >> entrada;
                 senha.setSenha(entrada);
-                cout << "Digite o nome (até 15 caracteres)";
+                cout << "Digite o nome (atÃ© 15 caracteres)";
                 cin >> entrada;
                 nome.setNome(entrada);
                 cout << "Digite o telefone (11 caracteres)";
@@ -93,10 +87,10 @@ ResultadoAutenticacao CntrIUAutenticacao::cadastrar() throw(runtime_error) {
             }
         }
 
-        // Solicitar autenticação.
+        // Solicitar autenticaÃ§Ã£o.
         resultado = cntrLNAutenticacao->cadastrar(usuario);
 
-        // Informar resultado da autenticação.
+        // Informar resultado da autenticaÃ§Ã£o.
 
         if(resultado.getValor() == ResultadoAutenticacao::FALHA){
             cout << endl << "Falha na autenticacao." << endl;
@@ -112,12 +106,7 @@ ResultadoAutenticacao CntrIUAutenticacao::cadastrar() throw(runtime_error) {
 }
 
 
-// Definições de métodos da classe CntrIUUsuario.
-///Este metodo recebe como parâmetro o apelido do usuario que vai selecionar uma opcao a ser executada.
-///e apresentada uma tela ao usuario com as diversas opcoes de acao no programa numeradas de 1 a 7.
-///A opcao selecionada e armazenada no inteiro "opcao", que selecionara o metodo correto a ser chamado.
-///A depender da opcao, o respectivo comando de logica de negocio e chamado. No caso da opcao "RETORNAR",
-///o programa e simplesmente encerrado.
+
 void CntrIUUsuario::executar(const Apelido &apelido) throw(runtime_error){
 
     ComandoIUUsuario *comando;
@@ -130,7 +119,7 @@ void CntrIUUsuario::executar(const Apelido &apelido) throw(runtime_error){
 
         system("CLS");
 
-        // Apresentar as opções.
+        // Apresentar as opÃ§Ãµes.
 
         cout << endl << "Gerenciamento de Usuario." << endl << endl;
 
@@ -192,9 +181,9 @@ void CntrIUUsuario::executar(const Apelido &apelido) throw(runtime_error){
 }
 
 
-//Definições dos métodos da classe CntrLNAutenticacao
+//DefiniÃ§Ãµes dos mÃ©todos da classe CntrLNAutenticacao
 
-/// Lógica de Negócio do método responsável pela autenticação.
+/// LÃ³gica de NegÃ³cio do mÃ©todo responsÃ¡vel pela autenticaÃ§Ã£o.
 /// Recebe o apelido e senha para comparar com os dados do servidor e retorna o valor do resultado.
 
 Resultado CntrLNAutenticacao::autenticar(const Apelido &apelido, const Senha &senha) throw(runtime_error) {
@@ -208,7 +197,7 @@ Resultado CntrLNAutenticacao::autenticar(const Apelido &apelido, const Senha &se
 
     ResultadoAutenticacao resultado;
 
-    // Diferentes comportamentos dependendo do valor da matrícula.
+    // Diferentes comportamentos dependendo do valor da matrÃ­cula.
 
     //Ler do banco de dados, se usuario e senha bater -> autentica, senao -> erro.
     Usuario usuario;
@@ -260,8 +249,8 @@ Resultado CntrLNAutenticacao::cadastrar(const Usuario &usuario) throw(runtime_er
 
     ResultadoAutenticacao resultado;
 
-    // Diferentes comportamentos dependendo do valor da matrícula.
-    //Procura o apelido no banco de dados, se nao encontrar -> cadastra, se encontrar -> diz que ja esta em uso
+    // Diferentes comportamentos dependendo do valor da matrÃ­cula.
+    // Procura o apelido no banco de dados, se nao encontrar -> cadastra, se encontrar -> diz que ja esta em uso
     try{
         ComandoPesquisarUsuario comandoPesquisarUsuario(usuario.getApelido());
         comandoPesquisarUsuario.executar();
@@ -287,20 +276,15 @@ Resultado CntrLNAutenticacao::cadastrar(const Usuario &usuario) throw(runtime_er
     return resultado;
 }
 
-
-/// Definições de métodos do controlador da lógica de negócio de autenticação.
-/// A função stub neste momento preenche o lugar da função definitiva de autenticação para fins de teste de integração.
-/// Recebe os dados do livro para comparar com os dados do servidor e retorna o valor do resultado.
-
 Resultado CntrLNUsuario::incluir(const Livro &livro) throw(runtime_error){
 
     // Apresentar dados recebidos.
-    int cadastrouLivro = 0;
+    int cadastrouLivro = 0; /** < Inteiro que sinaliza se o livro foi cadastrado. */
     cout << endl << "CntrLNUsuario::incluir" << endl ;
 
     Resultado resultado;
 
-     //Primeiro confirmaremos se o usuario ainda não atingiu o limite de livros na biblioteca
+     //Primeiro confirmaremos se o usuario ainda nÃ£o atingiu o limite de livros na biblioteca
     ComandoPesquisarExemplar comandoPesquisarExemplar(usuarioAtual.getApelido());
 
         comandoPesquisarExemplar.executar();
@@ -360,7 +344,7 @@ Resultado CntrLNUsuario::incluir(const Livro &livro) throw(runtime_error){
 
     }
     catch(EErroPersistencia exp){
-        //Se não encontrar o livro, cadastra o livro no banco de dados
+        //Se nÃ£o encontrar o livro, cadastra o livro no banco de dados
         cout << endl <<"Livro ainda nao cadastrado no sistema, cadastrando..." << endl;
         ComandoCadastrarLivro comandoCadastrarLivro(livro);
         cout << endl << "Dados recebidos..." << endl;
@@ -370,7 +354,7 @@ Resultado CntrLNUsuario::incluir(const Livro &livro) throw(runtime_error){
 
     }
 
-    //Faz o cadastro do exemplar. A chave de troca é sempre inicializada em '0'.
+    //Faz o cadastro do exemplar. A chave de troca Ã© sempre inicializada em '0'.
     cout << endl <<"Cadastrando exemplar..." << endl;
     exemplar.setApelido(usuarioAtual.getApelido());
     cout << endl << "Apelido salvo..." << endl;
@@ -405,11 +389,6 @@ Resultado CntrLNUsuario::incluir(const Livro &livro) throw(runtime_error){
     return resultado;
 }
 
-
-/// Definições de métodos do controlador da lógica de negócio de autenticação.
-/// A função stub neste momento preenche o lugar da função definitiva de autenticação para fins de teste de integração.
-/// Recebe o codigo para comparar com os dados do servidor e retorna o valor do resultado.
-
 Resultado CntrLNUsuario::remover(const Codigo &codigo) throw(runtime_error) {
 
     // Apresentar dados recebidos.
@@ -438,9 +417,9 @@ Resultado CntrLNUsuario::remover(const Codigo &codigo) throw(runtime_error) {
 }
 
 
-/// Definições de métodos do controlador da lógica de negócio de usuário.
-/// A função stub neste momento preenche o lugar da função definitiva de autenticação para fins de teste de integração.
-/// Recebe o código do livro para comparar com os dados do servidor e retorna o valor do resultado.
+/// DefiniÃ§Ãµes de mÃ©todos do controlador da lÃ³gica de negÃ³cio de usuÃ¡rio.
+/// A funÃ§Ã£o stub neste momento preenche o lugar da funÃ§Ã£o definitiva de autenticaÃ§Ã£o para fins de teste de integraÃ§Ã£o.
+/// Recebe o cÃ³digo do livro para comparar com os dados do servidor e retorna o valor do resultado.
 
 ResultadoLivro CntrLNUsuario::consultar(const Codigo &codigo) throw(runtime_error) {
 
@@ -468,8 +447,8 @@ ResultadoLivro CntrLNUsuario::consultar(const Codigo &codigo) throw(runtime_erro
 }
 
 
-/// Definições de métodos do controlador da lógica de negócio de autenticação.
-/// A função stub neste momento preenche o lugar da função definitiva de autenticação para fins de teste de integração.
+/// DefiniÃ§Ãµes de mÃ©todos do controlador da lÃ³gica de negÃ³cio de autenticaÃ§Ã£o.
+/// A funÃ§Ã£o stub neste momento preenche o lugar da funÃ§Ã£o definitiva de autenticaÃ§Ã£o para fins de teste de integraÃ§Ã£o.
 /// Recebe os dados da resenha para comparar com os dados do servidor e retorna o valor do resultado.
 
 ResultadoResenha CntrLNUsuario::escrever(const Titulo &titulo, const Texto &texto, const Data &data) throw(runtime_error) {
@@ -504,9 +483,9 @@ ResultadoResenha CntrLNUsuario::escrever(const Titulo &titulo, const Texto &text
 }
 
 
-/// Definições de métodos do controlador da lógica de negócio de autenticação.
-/// A função stub neste momento preenche o lugar da função definitiva de autenticação para fins de teste de integração.
-/// Recebe o apelido do usuário para comparar com os dados do servidor e retorna o valor do resultado.
+/// DefiniÃ§Ãµes de mÃ©todos do controlador da lÃ³gica de negÃ³cio de autenticaÃ§Ã£o.
+/// A funÃ§Ã£o stub neste momento preenche o lugar da funÃ§Ã£o definitiva de autenticaÃ§Ã£o para fins de teste de integraÃ§Ã£o.
+/// Recebe o apelido do usuÃ¡rio para comparar com os dados do servidor e retorna o valor do resultado.
 
 ResultadoUsuario CntrLNUsuario::pesquisar(const Apelido &apelido) throw(runtime_error) {
     //Inicializacao do usuario valido
@@ -536,9 +515,9 @@ ResultadoUsuario CntrLNUsuario::pesquisar(const Apelido &apelido) throw(runtime_
 }
 
 
-/// Definições de métodos do controlador da lógica de negócio de autenticação.
-/// A função stub neste momento preenche o lugar da função definitiva de autenticação para fins de teste de integração.
-/// Recebe o título do livro para comparar com os dados do servidor e retorna o valor do resultado.
+/// DefiniÃ§Ãµes de mÃ©todos do controlador da lÃ³gica de negÃ³cio de autenticaÃ§Ã£o.
+/// A funÃ§Ã£o stub neste momento preenche o lugar da funÃ§Ã£o definitiva de autenticaÃ§Ã£o para fins de teste de integraÃ§Ã£o.
+/// Recebe o tÃ­tulo do livro para comparar com os dados do servidor e retorna o valor do resultado.
 
 ResultadoUsuario CntrLNUsuario::trocar(const Titulo &titulo, const int operacao) throw(runtime_error) {
     Usuario usuario;
