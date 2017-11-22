@@ -464,3 +464,16 @@ void Troca::setTroca(string troca) throw (invalid_argument){
     validar(troca);
     this->troca = troca;
 }
+
+//*****************Unidades**********************
+
+void Unidades::validar(int unidades) throw(invalid_argument){
+    if((unidades<0) || (unidades>10)){
+        throw invalid_argument ("Valor inválido.");
+    }
+}
+
+void Unidades::setUnidades(int unidades) throw(invalid_argument){
+    validar(unidades);
+    this->unidades = unidades;
+}

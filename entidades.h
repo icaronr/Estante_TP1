@@ -62,6 +62,7 @@ private:
     Telefone telefone;
     Senha senha;
     Exemplar estante[10];
+    Unidades unidades;
 
 public:
     void setNome (const Nome &nome){
@@ -79,6 +80,10 @@ public:
     void setEstante(const Exemplar &exemplar, int pos){
         this->estante[pos] = exemplar;
     }
+    void setUnidades(const Unidades &unidades){
+        this->unidades = unidades;
+    }
+
     Nome getNome() const{
         return nome;
     }
@@ -93,6 +98,9 @@ public:
     }
     Exemplar getEstante(int pos) const{
         return estante[pos];
+    }
+    Unidades getUnidades() const{
+        return unidades;
     }
 };
 

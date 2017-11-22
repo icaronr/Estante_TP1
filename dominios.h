@@ -315,5 +315,18 @@ public:
     }
 };
 
+///A classe "Unidades" guarda a quantidade de livros que o usuário possui em sua estante.
+class Unidades{
+private:
+    int unidades;
+    void validar(int) throw(invalid_argument);
+
+public:
+    void setUnidades(int) throw(invalid_argument);
+    int getUnidades() const{
+        return unidades;
+    }
+
+};
 
 #endif // DOMINIOS_H_INCLUDED

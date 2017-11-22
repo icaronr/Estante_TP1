@@ -3,9 +3,11 @@
 
 #include "dominios.h"
 #include "entidades.h"
+#include "unidadePersistencia.h"
 #include <list>
 
 extern Usuario usuarioAtual;
 extern list <Exemplar> exemplarTrocaGlobal;
+extern void contabilizar();
 
 #endif // GLOBAL_H_INCLUDED

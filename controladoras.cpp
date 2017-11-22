@@ -306,9 +306,11 @@ Resultado CntrLNUsuario::incluir(const Livro &livro) throw(runtime_error){
         comandoPesquisarExemplar.executar();
 
         int j = 0;
+        Unidades unidades;
         while(true){
 
             try{
+
                 Exemplar exemplarRecuperado;
                 exemplarRecuperado = comandoPesquisarExemplar.getResultado();
                 usuarioAtual.setEstante(exemplarRecuperado, j);
@@ -317,16 +319,22 @@ Resultado CntrLNUsuario::incluir(const Livro &livro) throw(runtime_error){
                 if(j>9){
                     resultado.setValor(Resultado::FALHA);
                     cout << "A estante ja esta cheia." << endl;
+                    unidades.setUnidades(10);
+                    usuarioAtual.setUnidades(unidades);
                     return resultado;
                 }
 
             }
             catch(EErroPersistencia exp){
                 cout << "Estante processada com sucesso!"<< endl;
+                unidades.setUnidades(j);
+                usuarioAtual.setUnidades(unidades);
                 break;
             }
 
         }
+        cout << usuarioAtual.getUnidades().getUnidades() << endl;
+        getch();
 
         //Agora testa se o usuario ja possui um exemplar desse livro na estante
 

@@ -462,16 +462,17 @@
 	<stdexcept>
 	<list>
 
-1511196209 d:\downloads\unb\tp1\estante_tp1\dominios.h
+1511288279 d:\downloads\unb\tp1\estante_tp1\dominios.h
 	<stdexcept>
 
-1511197280 d:\downloads\unb\tp1\estante_tp1\entidades.h
+1511288536 d:\downloads\unb\tp1\estante_tp1\entidades.h
 	"dominios.h"
 	<string>
 
-1511199613 d:\downloads\unb\tp1\estante_tp1\global.h
+1511297975 d:\downloads\unb\tp1\estante_tp1\global.h
 	"dominios.h"
 	"entidades.h"
+	"unidadePersistencia.h"
 	<list>
 
 1511211005 d:\downloads\unb\tp1\estante_tp1\controladoras.h
@@ -484,7 +485,7 @@
 	<cstdlib>
 	<list>
 
-1511269734 d:\downloads\unb\tp1\estante_tp1\unidadepersistencia.h
+1511289645 d:\downloads\unb\tp1\estante_tp1\unidadepersistencia.h
 	"dominios.h"
 	"entidades.h"
 	<list>
@@ -497,7 +498,7 @@
 1511196209 d:\downloads\unb\tp1\estante_tp1\sqlite3.h
 	<stdarg.h>
 
-1511196209 source:d:\downloads\unb\tp1\estante_tp1\dominios.cpp
+1511288266 source:d:\downloads\unb\tp1\estante_tp1\dominios.cpp
 	"dominios.h"
 	<string>
 	<iostream>
@@ -505,7 +506,7 @@
 1511196209 source:d:\downloads\unb\tp1\estante_tp1\entidades.cpp
 	"entidades.h"
 
-1511199643 source:d:\downloads\unb\tp1\estante_tp1\global.cpp
+1511306907 source:d:\downloads\unb\tp1\estante_tp1\global.cpp
 	"global.h"
 
 1511283087 source:d:\downloads\unb\tp1\estante_tp1\main.cpp
@@ -591,7 +592,7 @@
 1511196210 source:d:\downloads\unb\tp1\estante_tp1\stubs.cpp
 	"stubs.h"
 
-1511281852 source:d:\downloads\unb\tp1\estante_tp1\controladoras.cpp
+1511288924 source:d:\downloads\unb\tp1\estante_tp1\controladoras.cpp
 	"controladoras.h"
 	"comandos.h"
 	"interfaces.h"
