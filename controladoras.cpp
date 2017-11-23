@@ -283,49 +283,27 @@ Resultado CntrLNUsuario::incluir(const Livro &livro) throw(runtime_error){
     cout << endl << "CntrLNUsuario::incluir" << endl ;
 
     Resultado resultado;
-    resultado = (CntrLNUsuario::contabilizar());
      //Primeiro confirmaremos se o usuario ainda não atingiu o limite de livros na biblioteca
-    /*
-    ComandoPesquisarExemplar comandoPesquisarExemplar(usuarioAtual.getApelido());
-
-        comandoPesquisarExemplar.executar();
-
-        int j = 0;
-        Unidades unidades;
-        while(true){
-
-            try{
-
-                Exemplar exemplarRecuperado;
-                exemplarRecuperado = comandoPesquisarExemplar.getResultado();
-                usuarioAtual.setEstante(exemplarRecuperado, j);
-
-                j++;
-                if(j>9){
-                    resultado.setValor(Resultado::FALHA);
-                    cout << "A estante ja esta cheia." << endl;
-                    unidades.setUnidades(10);
-                    usuarioAtual.setUnidades(unidades);
-                    return resultado;
-                }
-
-            }
-            catch(EErroPersistencia exp){
-                cout << "Estante processada com sucesso!"<< endl;
-                unidades.setUnidades(j);
-                usuarioAtual.setUnidades(unidades);
-                break;
-            }
-
-        }
-        */
-        cout << usuarioAtual.getUnidades().getUnidades() << endl;
+    resultado = (CntrLNUsuario::contabilizar());
+    if(resultado.getValor() == Resultado::FALHA){
+        cout << endl << "Erro ao processar a estante!" << endl;
         getch();
+        return resultado;
+    }
+
+    int j = usuarioAtual.getUnidades().getUnidades();
+    if(j>9){
+        resultado.setValor(Resultado::FALHA);
+        cout << endl <<"A estante ja atingiu o limite de 10 exemplares!" << endl;
+        return resultado;
+    }
+
+
 
         //Agora testa se o usuario ja possui um exemplar desse livro na estante
 
         int i;
-        int j = usuarioAtual.getUnidades().getUnidades();
+
         for(i=0; i<j; i++){
             if(usuarioAtual.getEstante(i).getCodigo().getCodigo() == livro.getCodigo().getCodigo()){
                 resultado.setValor(Resultado::FALHA);
@@ -398,7 +376,52 @@ Resultado CntrLNUsuario::remover(const Codigo &codigo) throw(runtime_error) {
 
     cout << endl << "CntrLNUsuario::remover" << endl ;
 
+
     Resultado resultado;
+    //Processa a estante do usuario atual.
+    resultado = (CntrLNUsuario::contabilizar());
+    if(resultado.getValor() == Resultado::FALHA){
+        cout << endl << "Erro ao processar a estante!" << endl;
+        getch();
+        return resultado;
+    }
+    //Retorna falha se a estante estiver vazia.
+    if(usuarioAtual.getUnidades().getUnidades() == 0){
+        cout << endl << "A sua estante nao possui nenhum exemplar!" << endl;
+        getch();
+        resultado.setValor(Resultado::FALHA);
+        return resultado;
+    }
+    //Procura o exemplar na estante do usuario
+    int j = usuarioAtual.getUnidades().getUnidades();
+    int i;
+    resultado.setValor(Resultado::FALHA);
+    for(i=0; i<j; i++){
+        if(usuarioAtual.getEstante(i).getCodigo().getCodigo() == codigo.getCodigo()){
+            resultado.setValor(Resultado::SUCESSO);
+            break;
+        }
+    }
+    //Caso nao encontra, retorna falha.
+    if(resultado.getValor() == Resultado::FALHA){
+        cout << endl << "O exemplar informado nao foi encontrado em sua estante!" << endl;
+        return resultado;
+    }
+
+    //Remove o exemplar do banco de dados da estante do usuario.
+    ComandoRemoverExemplar comandoRemoverExemplar(codigo, usuarioAtual.getApelido());
+    comandoRemoverExemplar.executar();
+
+    //Processa novamente a estante para conferir os valores
+    resultado = (CntrLNUsuario::contabilizar());
+    // j ainda armazena a quantidade antiga de unidades na estante.
+    if(usuarioAtual.getUnidades().getUnidades() != (j-1)){
+        resultado.setValor(Resultado::FALHA);
+        cout << endl << "Houve um erro no processamento da estante apos a remocao!" << endl;
+        getch();
+        return resultado;
+    }
+
     try{
         ComandoPesquisarLivro comandoPesquisarLivro(codigo);
         comandoPesquisarLivro.executar();

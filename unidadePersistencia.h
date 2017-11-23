@@ -21,10 +21,10 @@ using namespace std;
 
 //---------------------------------------------------------------------------
 //Classe EErroPersistencia.
-///Esta classe define as variáveis e métodos utilizados em caso de erro na conexão 
-///com o banco de dados. Como variável privada, possui a string "mensagem", que é 
+///Esta classe define as variáveis e métodos utilizados em caso de erro na conexão
+///com o banco de dados. Como variável privada, possui a string "mensagem", que é
 ///utilizada para armazenar a mensagem de erro produzida pelo programa.
-///O método público "EErroPersistencia" recebe a string que será armazenada em mensagem. 
+///O método público "EErroPersistencia" recebe a string que será armazenada em mensagem.
 ///A string pública "what" é utilizada para retornar a mensagem para outros métodos.
 
 class EErroPersistencia {
@@ -85,7 +85,7 @@ private:
         * mensagem de erro em caso de falha.
         */
         void desconectar() throw (EErroPersistencia);
-        
+
         /**
         * Método que recebe os elementos encontrados no banco de dados conforme a pesquisa realizada.
         * Como parâmetros, recebe um inteiro que conta quantos elementos buscados foram encontrados,
@@ -109,7 +109,7 @@ public:
 
 //---------------------------------------------------------------------------
 //Classe ComandoLerSenha.
-///A classe "ComandoLerSenha" é essencial ao processo de autenticação. O método "ComandoLerSenha" 
+///A classe "ComandoLerSenha" é essencial ao processo de autenticação. O método "ComandoLerSenha"
 ///recebe o nome de usuário fornecido e por meio de comandos SQL, acessa a senha daquele usuário.
 ///O comando "getResultado" quando não encontra erros retorna a senha do usuario. Quando não
 ///consegue encontrar a senha para o nome de usuário fornecido, retorna uma mensagem de erro.
@@ -140,9 +140,9 @@ public:
 //---------------------------------------------------------------------------
 //Classe ComandoCadastrarUsuario.
 /// Esta classe contém apenas o método "ComandoCadastrarUsuario(Usuario)", ou seja, recebe como parâmetro
-/// um objeto do tipo "usuario". Utiliza os métodos de acesso aos dados deste objeto (getApelido, 
+/// um objeto do tipo "usuario". Utiliza os métodos de acesso aos dados deste objeto (getApelido,
 /// getSenha, getNome, getTelefone) e passa o resultado desses gets para o banco de dados por meio de comando
-/// INSERT do SQL, criando um novo usuário.  
+/// INSERT do SQL, criando um novo usuário.
 
 class ComandoCadastrarUsuario:public ComandoSQL {
 public:
@@ -190,16 +190,16 @@ public:
         * Recebe como parâmetro um código de livro. Não retorna valores.
         */
         ComandoPesquisarLivro(Codigo);
-        
+
         /**
         * Método que utiliza o comando SELECT do SQLite para realizar a busca por título.
         * Recebe como parâmetro um título de livro. Não retorna valores.
         */
         ComandoPesquisarLivro(Titulo);
-        
+
         /**
         * Método que utiliza o resultado da busca realizada pelos métodos acima para
-        * preencher um objeto "livro" com os dados encontrados no banco. Retorna o objeto 
+        * preencher um objeto "livro" com os dados encontrados no banco. Retorna o objeto
         * "livro" com todos os campos preenchidos em caso de sucesso. Em caso de falha retorna
         * mensagem de erro.
         */
@@ -288,7 +288,7 @@ public:
 /// para modificar valores de um exemplar no banco de dados.
 
 class ComandoAtualizarExemplar:public ComandoSQL {
-public:        
+public:
         /**
         * Recebe como parâmetro um objeto "exemplar". Não retorna valores.
         */
@@ -303,9 +303,9 @@ public:
 class ComandoRemoverExemplar:public ComandoSQL {
 public:
         /**
-        * Recebe como parâmetro um objeto "codigo". Não retorna valores.
+        * Recebe como parâmetro um objeto "codigo" e um objeto "apelido". Não retorna valores.
         */
-        ComandoRemoverExemplar(Codigo);
+        ComandoRemoverExemplar(Codigo, Apelido);
 };
 
 //---------------------------------------------------------------------------
@@ -327,7 +327,7 @@ public:
         ComandoPesquisarResenha(Apelido);
         /**
         * Método que utiliza o resultado da busca realizada pelos métodos acima para
-        * preencher um objeto "resenha" com os dados encontrados no banco. Retorna o objeto 
+        * preencher um objeto "resenha" com os dados encontrados no banco. Retorna o objeto
         * "resenha" com todos os campos preenchidos em caso de sucesso. Em caso de falha retorna
         * mensagem de erro.
         */
@@ -354,7 +354,7 @@ public:
 /// para modificar valores de uma resenha no banco de dados.
 
 class ComandoAtualizarResenha:public ComandoSQL {
-public:        
+public:
        /**
         * Recebe como parâmetro um objeto "resenha". Não retorna valores.
         */
@@ -369,9 +369,9 @@ public:
 class ComandoRemoverResenha:public ComandoSQL {
 public:
         /**
-        * Recebe como parâmetro um objeto "codigo". Não retorna valores.
+        * Recebe como parâmetro um objeto "codigo" e um objeto "apelido". Não retorna valores.
         */
-        ComandoRemoverResenha(Codigo);
+        ComandoRemoverResenha(Codigo, Apelido);
 };
 
 //---------------------------------------------------------------------------

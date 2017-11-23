@@ -348,10 +348,11 @@ ComandoCadastrarResenha::ComandoCadastrarResenha(Resenha resenha) {
 //---------------------------------------------------------------------------
 //Classe ComandoRemoverResenha.
 
-ComandoRemoverResenha::ComandoRemoverResenha(Codigo codigo) {
+ComandoRemoverResenha::ComandoRemoverResenha(Codigo codigo, Apelido apelido) {
         comandoSQL = "DELETE FROM RESENHAS WHERE CODIGO = ";
         comandoSQL += "'" + codigo.getCodigo() + "'";
-        comandoSQL += ";";
+        comandoSQL += " AND APELIDO = '" + apelido.getApelido();
+        comandoSQL += "';";
 }
 
 //---------------------------------------------------------------------------
@@ -364,6 +365,7 @@ ComandoAtualizarResenha::ComandoAtualizarResenha(Resenha resenha) {
         comandoSQL += "', apelido = '" + resenha.getApelido().getApelido();
         comandoSQL += "', data = '" + resenha.getData().getData();
         comandoSQL += "' WHERE codigo = " + resenha.getCodigo().getCodigo();
+        comandoSQL += " AND apelido = '" + resenha.getApelido().getApelido() + "';";
 }
 
 
@@ -433,9 +435,11 @@ ComandoCadastrarExemplar::ComandoCadastrarExemplar(Exemplar exemplar) {
 //---------------------------------------------------------------------------
 //Classe ComandoRemoverExemplar.
 
-ComandoRemoverExemplar::ComandoRemoverExemplar(Codigo codigo) {
+ComandoRemoverExemplar::ComandoRemoverExemplar(Codigo codigo, Apelido apelido) {
         comandoSQL = "DELETE FROM EXEMPLARES WHERE CODIGO = ";
         comandoSQL += "'" + codigo.getCodigo() + "'";
+        comandoSQL += " AND APELIDO = ";
+        comandoSQL += "'" + apelido.getApelido() + "'";
         comandoSQL += ";";
 }
 
@@ -448,4 +452,5 @@ ComandoAtualizarExemplar::ComandoAtualizarExemplar(Exemplar exemplar) {
         comandoSQL += "', codigo = '" + exemplar.getCodigo().getCodigo();
         comandoSQL += "', troca = '" + exemplar.getTroca().getTroca();
         comandoSQL += "' WHERE codigo = " + exemplar.getCodigo().getCodigo();
+        comandoSQL += " AND apelido = '" + exemplar.getApelido().getApelido() + "';";
 }
