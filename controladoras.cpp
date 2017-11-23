@@ -68,7 +68,7 @@ ResultadoAutenticacao CntrIUAutenticacao::cadastrar() throw(runtime_error) {
         while(true) {
 
             try {
-                cout << "Digite o apelido (5 letras): ";
+                cout << "Digite o apelido (ate 5 letras): ";
                 cin.sync();//refresh no buffer de entrada
                 cin >> entrada;
                 apelido.setApelido(entrada);
@@ -680,7 +680,10 @@ ResultadoUsuario CntrLNUsuario::trocar(const Titulo &titulo, const int operacao)
             //Bota os resultados na lista
             while(true){
                 //O loop vai quebrar quando nao restarem resultados para serem retornados.
-                exemplarTrocaGlobal.push_front(comandoPesquisarExemplar.getResultado());
+                Exemplar exemplarRecuperado;
+                exemplarRecuperado = comandoPesquisarExemplar.getResultado();
+                if(exemplarRecuperado.getTroca().getTroca() == "1")
+                    exemplarTrocaGlobal.push_front(exemplarRecuperado);
 
             }
 
@@ -688,12 +691,12 @@ ResultadoUsuario CntrLNUsuario::trocar(const Titulo &titulo, const int operacao)
         catch(EErroPersistencia exp){
             //Se a lista estiver vazia, retorna falha
             if(exemplarTrocaGlobal.empty()){
-                cout << "Nao foram encontrados usuarios com esse livro." << endl;
+                cout << "Nao foram encontrados usuarios com esse livro para troca." << endl;
                 resultado.setValor(Resultado::FALHA);
                 return resultado;
             }else{
-            resultado.setValor(Resultado::SUCESSO);
-            return resultado;
+                resultado.setValor(Resultado::SUCESSO);
+                return resultado;
             }
 
         }

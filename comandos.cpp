@@ -17,12 +17,14 @@ void ComandoIUUsuarioExibir::executar(ILNUsuario* cntrLNUsuario) throw(runtime_e
         livro = comandoPesquisarLivro.getResultado();
         cout << endl << "Exemplar " << i+1 << endl;
         cout << "Codigo             - " << livro.getCodigo().getCodigo() << endl;
-        cout << "Titulo             - " << livro.getTitulo().getTitulo() << endl;
+        cout << "Titulo             - " << "'" << livro.getTitulo().getTitulo() << "'" << endl;
         cout << "Autor              - " << livro.getAutor().getAutor() << endl;
         string data = livro.getData().getData();
         cout << "Data de publicacao - " << data[0] << data[1] << "/" << data[2] << data[3] << "/" << data[4] << data[5] << endl;
         cout << "Genero Literario   - " << livro.getGeneroLiterario().getGeneroLiterario() << endl;
     }
+    if(j == 0)
+        cout << "Estante vazia!";
     cout << endl << "Pressione qualquer tecla para continuar..." << endl;
     getch();
 
@@ -194,11 +196,12 @@ void ComandoIUUsuarioConsultar::executar(ILNUsuario* cntrLNUsuario)throw(runtime
         Livro livro;
         livro = resultado.getLivro();
          cout << "Sucesso na execucao da operacao" << endl;
-         cout << "Codigo           - " << livro.getCodigo().getCodigo() << endl;
-         cout << "Titulo           - " << livro.getTitulo().getTitulo() << endl;
-         cout << "Autor            - " << livro.getAutor().getAutor() << endl;
-         cout << "Data             - " << livro.getData().getData() << endl;
-         cout << "Genero Literario - " << livro.getGeneroLiterario().getGeneroLiterario() << endl;
+         cout << "Codigo             - " << livro.getCodigo().getCodigo() << endl;
+         cout << "Titulo             - " << livro.getTitulo().getTitulo() << endl;
+         cout << "Autor              - " << livro.getAutor().getAutor() << endl;
+         string data = livro.getData().getData();
+         cout << "Data de publicacao - " << data[0] << data[1] << "/" << data[2] << data[3] << "/" << data[4] << data[5] << endl;
+         cout << "Genero Literario   - " << livro.getGeneroLiterario().getGeneroLiterario() << endl;
     }
     else {
         cout << "Falha na execucao da operacao" << endl;
@@ -348,7 +351,7 @@ void ComandoIUUsuarioTrocar::executar(ILNUsuario* cntrLNUsuario)throw(runtime_er
     ResultadoUsuario resultado;
     int opcao;
     Titulo titulo;
-
+Codigo codigo;
 
     // Código de interação com o usuário.
     while(true){
@@ -363,8 +366,7 @@ void ComandoIUUsuarioTrocar::executar(ILNUsuario* cntrLNUsuario)throw(runtime_er
             string tituloTroca;
             cout << "Digite o titulo para informar troca: ";
             cin.sync(); //sincronizar buffer para evitar loop
-            cin >> noskipws>> tituloTroca;
-
+            getline(cin, tituloTroca);
             titulo.setTitulo(tituloTroca);
             cin.sync(); //sincronizar buffer para evitar loop
             break;
@@ -373,7 +375,7 @@ void ComandoIUUsuarioTrocar::executar(ILNUsuario* cntrLNUsuario)throw(runtime_er
                 string tituloTroca;
                 cout << "Digite o titulo: ";
                 cin.sync(); //sincronizar buffer para evitar loop
-                cin >> noskipws>> tituloTroca;
+                getline(cin, tituloTroca);
 
                 titulo.setTitulo(tituloTroca);
                 cin.sync(); //sincronizar buffer para evitar loop
