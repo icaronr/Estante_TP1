@@ -306,6 +306,8 @@ public:
         * Recebe como parâmetro um objeto "codigo" e um objeto "apelido". Não retorna valores.
         */
         ComandoRemoverExemplar(Codigo, Apelido);
+        ComandoRemoverExemplar(Codigo);
+        ComandoRemoverExemplar(Apelido);
 };
 
 //---------------------------------------------------------------------------
@@ -372,6 +374,8 @@ public:
         * Recebe como parâmetro um objeto "codigo" e um objeto "apelido". Não retorna valores.
         */
         ComandoRemoverResenha(Codigo, Apelido);
+        ComandoRemoverResenha(Codigo);
+        ComandoRemoverResenha(Apelido);
 };
 
 //---------------------------------------------------------------------------

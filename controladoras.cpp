@@ -376,8 +376,19 @@ Resultado CntrLNUsuario::remover(const Codigo &codigo) throw(runtime_error) {
 
     cout << endl << "CntrLNUsuario::remover" << endl ;
 
-
     Resultado resultado;
+    //Procura o livro no banco de dados
+    try{
+        ComandoPesquisarLivro comandoPesquisarLivro(codigo);
+        comandoPesquisarLivro.executar();
+        Livro livroRecuperado;
+        livroRecuperado = comandoPesquisarLivro.getResultado();
+    }
+    catch(EErroPersistencia exp){
+        cout << endl <<"Livro nao encontrado no sistema." << endl;
+        resultado.setValor(ResultadoAutenticacao::FALHA);
+        return resultado;
+    }
     //Processa a estante do usuario atual.
     resultado = (CntrLNUsuario::contabilizar());
     if(resultado.getValor() == Resultado::FALHA){
@@ -417,26 +428,42 @@ Resultado CntrLNUsuario::remover(const Codigo &codigo) throw(runtime_error) {
     // j ainda armazena a quantidade antiga de unidades na estante.
     if(usuarioAtual.getUnidades().getUnidades() != (j-1)){
         resultado.setValor(Resultado::FALHA);
-        cout << endl << "Houve um erro no processamento da estante apos a remocao!" << endl;
+        cout << endl << "Houve um erro no processamento da estante apos a remocao do exemplar!" << endl;
         getch();
         return resultado;
     }
-
     try{
-        ComandoPesquisarLivro comandoPesquisarLivro(codigo);
-        comandoPesquisarLivro.executar();
-        Livro livroRecuperado;
-        livroRecuperado = comandoPesquisarLivro.getResultado();
+        Exemplar exemplarRecuperado;
+
+        ComandoPesquisarExemplar comandoPesquisarExemplar(codigo);
+        comandoPesquisarExemplar.executar();
+        //esvazia a lista global
+        while(!exemplarTrocaGlobal.empty()){
+            exemplarTrocaGlobal.pop_back();
+        }
+        //Bota os resultados na lista
+        while(true){
+            //O loop vai quebrar quando nao restarem resultados para serem retornados.
+            exemplarTrocaGlobal.push_front(comandoPesquisarExemplar.getResultado());
+        }
     }
     catch(EErroPersistencia exp){
-        cout << endl <<"Livro nao encontrado no sistema." << endl;
-        resultado.setValor(ResultadoAutenticacao::FALHA);
-        return resultado;
+        //Se houver pelo menos 1 exemplar na lista, retorna.
+        if(!exemplarTrocaGlobal.empty()){
+            resultado.setValor(Resultado::SUCESSO);
+            return resultado;
+        }else{
+            //Se nao houver nenhum exemplar com o codigo, apaga o livro do sistema
+            //Apaga as resenhas
+            ComandoRemoverResenha comandoRemoverResenha(codigo);
+            comandoRemoverResenha.executar();
+            //Apaga o livro
+            ComandoRemoverLivro comandoRemoverLivro(codigo);
+            comandoRemoverLivro.executar();
+            resultado.setValor(Resultado::SUCESSO);
+            return resultado;
+        }
     }
-
-    ComandoRemoverLivro comandoRemoverLivro(codigo);
-    comandoRemoverLivro.executar();
-
     resultado.setValor(Resultado::SUCESSO);
 
     return resultado;
@@ -617,21 +644,27 @@ ResultadoUsuario CntrLNUsuario::trocar(const Titulo &titulo, const int operacao)
             while(!exemplarTrocaGlobal.empty()){
                 exemplarTrocaGlobal.pop_back();
             }
-        }
-        catch(EErroPersistencia exp){
-            cout << "Nao foram encontrados usuarios com esse livro." << endl;
-            resultado.setValor(Resultado::FALHA);
-            return resultado;
-        }
-        try{
+            //Bota os resultados na lista
             while(true){
+                //O loop vai quebrar quando nao restarem resultados para serem retornados.
                 exemplarTrocaGlobal.push_front(comandoPesquisarExemplar.getResultado());
 
             }
+
         }
         catch(EErroPersistencia exp){
+            //Se a lista estiver vazia, retorna falha
+            if(exemplarTrocaGlobal.empty()){
+                cout << "Nao foram encontrados usuarios com esse livro." << endl;
+                resultado.setValor(Resultado::FALHA);
+                return resultado;
+            }else{
             resultado.setValor(Resultado::SUCESSO);
+            return resultado;
+            }
+
         }
+
 
     }
 

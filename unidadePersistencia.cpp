@@ -355,6 +355,18 @@ ComandoRemoverResenha::ComandoRemoverResenha(Codigo codigo, Apelido apelido) {
         comandoSQL += "';";
 }
 
+ComandoRemoverResenha::ComandoRemoverResenha(Codigo codigo) {
+        comandoSQL = "DELETE FROM RESENHAS WHERE CODIGO = ";
+        comandoSQL += "'" + codigo.getCodigo() + "'";
+        comandoSQL += ";";
+}
+
+ComandoRemoverResenha::ComandoRemoverResenha(Apelido apelido) {
+        comandoSQL = "DELETE FROM RESENHAS WHERE APELIDO = ";
+        comandoSQL += "'" + apelido.getApelido() + "'";
+        comandoSQL += ";";
+}
+
 //---------------------------------------------------------------------------
 //Classe ComandoEditarResenha.
 
@@ -442,7 +454,16 @@ ComandoRemoverExemplar::ComandoRemoverExemplar(Codigo codigo, Apelido apelido) {
         comandoSQL += "'" + apelido.getApelido() + "'";
         comandoSQL += ";";
 }
-
+ComandoRemoverExemplar::ComandoRemoverExemplar(Codigo codigo) {
+        comandoSQL = "DELETE FROM EXEMPLARES WHERE CODIGO = ";
+        comandoSQL += "'" + codigo.getCodigo() + "'";
+        comandoSQL += ";";
+}
+ComandoRemoverExemplar::ComandoRemoverExemplar(Apelido apelido) {
+        comandoSQL = "DELETE FROM EXEMPLARES WHERE APELIDO = ";
+        comandoSQL += "'" + apelido.getApelido() + "'";
+        comandoSQL += ";";
+}
 //---------------------------------------------------------------------------
 //Classe ComandoEditarExemplar.
 
