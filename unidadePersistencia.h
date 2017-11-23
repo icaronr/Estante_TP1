@@ -121,6 +121,18 @@ public:
 };
 
 //---------------------------------------------------------------------------
+//Classe ComandoLerApelidos.
+///A classe "ComandoLerApelidos" é essencial ao processo de cadastro. O método "ComandoLerApelidos"
+/// por meio de comandos SQL, procura o apelido na tabela de usuário.
+///O comando "getResultado" quando não encontra erros e encontra o apelido retorna SUCESSO. Quando não
+///consegue encontrar o apelido fornecido, retorna FALHA.
+class ComandoLerApelidos:public ComandoSQL {
+public:
+        ComandoLerApelidos();
+        string getResultado() throw (EErroPersistencia);
+};
+
+//---------------------------------------------------------------------------
 //Classe ComandoPesquisarUsuario.
 ///Esta classe pesquisa um usuário no banco de dados por meio do apelido fornecido.
 

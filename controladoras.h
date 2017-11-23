@@ -26,7 +26,7 @@ private:
     ILNAutenticacao *cntrLNAutenticacao;
 
 public:
-    
+
     /**
      * Este método público realiza o contato com o usuário para solicitar seus dados para cadastro.
      * Primeiro utiliza os serviços de entrada e saída no console para solicitar apelido, senha, nome e telefone.
@@ -35,7 +35,7 @@ public:
      * Retorna um objeto do tipo "ResultadoAutenticacao" com o apelido do usuário que tentou o acesso e o resultado da solicitação.
      */
     ResultadoAutenticacao cadastrar() throw(runtime_error);
-    
+
     /**
      * Este método realiza o contato com o usuário para solicitar seus dados para autenticação.
      * Primeiro utiliza os serviços de entrada e saída no console para solicitar apelido e senha.
@@ -60,11 +60,12 @@ class CntrIUUsuario:public IUUsuario {
 
 private:
 
+    const static int EXIBIR    = 0; /**< Valor constante para exibicao. */
     const static int INCLUIR   = 1; /**< Valor constante para inclusão. */
     const static int REMOVER   = 2; /**< Valor constante para remoção. */
     const static int CONSULTAR = 3; /**< Valor constante para consulta. */
-    const static int ESCREVER  = 4; /**< Valor constante para escrita. */ 
-    const static int PESQUISAR  = 5; /**< Valor constante para pesquisa. */ 
+    const static int ESCREVER  = 4; /**< Valor constante para escrita. */
+    const static int PESQUISAR  = 5; /**< Valor constante para pesquisa. */
     const static int TROCAR    = 6; /**< Valor constante para troca. */
     const static int RETORNAR  = 7; /**< Valor constante para retorno. */
 
@@ -86,7 +87,7 @@ public:
 
     /**
     * Método por meio do qual é estabelecido relacionamento com o servidor.
-    */ 
+    */
     void setCntrLNUsuario(ILNUsuario *cntrLNUsuario){
         this->cntrLNUsuario = cntrLNUsuario;
     }
@@ -106,7 +107,7 @@ public:
     * Caso contrário o usuário é cadastrado. O método retorna o resultado do cadastro.
     */
     Resultado cadastrar(const Usuario&) throw(runtime_error);
-    
+
     /**
     * Método que realiza a etapa de interface com usuário da autenticação. Recebe como parâmetro
     * um objeto "usuario". Solicita ao usuário a entrada de um apelido e senha. O objeto "usuario"
@@ -125,20 +126,20 @@ class CntrLNUsuario:public ILNUsuario{  // classe implementa a interface.
 public:
 
     /**
-    * Método responsável por incluir um livro na estante do usuário. 
+    * Método responsável por incluir um livro na estante do usuário.
     * Recebe como parâmetro um objeto "livro". Pesquisa se o usuario, armazenado em
     * "usuarioAtual" atingiu o limite de livros na biblioteca. Se sim, retorna esse resultado
     * sem incluir o livro.
-    * Pesquisa se o usuario já posusi um exemplar daquele livro na estante virtual. Se sim, 
-    * retorna esse resultado sem incluir o livro. 
+    * Pesquisa se o usuario já posusi um exemplar daquele livro na estante virtual. Se sim,
+    * retorna esse resultado sem incluir o livro.
     * Na negativa dos dois casos acima, consulta se o livro já está cadastrado.
     * Caso contrário, cadastra o exemplar. Se há erro ao cadastrar o exemplar, retorna.
     * No sucesso do cadastro, retorna o resultado de sucesso.
     */
     Resultado incluir(const Livro&) throw(runtime_error);
-    
+
     /**
-    * Método responsável por remover um livro da estante do usuário. 
+    * Método responsável por remover um livro da estante do usuário.
     * Recebe como parâmetro um objeto "codigo". Pesquisa o livro na estante do usuário,
     * armazenando-o em "livroRecuperado. Caso não encontre, retorna mensagem de erro e o
     * resultado negativo.

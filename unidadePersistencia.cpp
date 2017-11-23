@@ -90,7 +90,26 @@ string ComandoLerSenha::getResultado() throw (EErroPersistencia) {
 
         return senha;
 }
+//---------------------------------------------------------------------------
+//Classe ComandoLerApelidos.
+ComandoLerApelidos::ComandoLerApelidos() {
+        comandoSQL = "SELECT apelido FROM usuarios;";
 
+}
+
+string ComandoLerApelidos::getResultado() throw (EErroPersistencia) {
+        ElementoResultado resultado;
+        string apelido;
+
+        //Remover senha;
+        if (listaResultado.empty())
+                throw EErroPersistencia("Lista de resultados vazia.");
+        resultado = listaResultado.back();
+        listaResultado.pop_back();
+        apelido = resultado.getValorColuna();
+
+        return apelido;
+}
 //---------------------------------------------------------------------------
 //Classe ComandoPesquisarUsuario.
 
@@ -123,6 +142,8 @@ Usuario ComandoPesquisarUsuario::getResultado() throw (EErroPersistencia) {
         listaResultado.pop_back();
         senha.setSenha(resultado.getValorColuna());
         usuario.setSenha(senha);
+
+
 
         // Remover nome;
         if (listaResultado.empty())
@@ -312,6 +333,14 @@ Resenha ComandoPesquisarResenha::getResultado() throw (EErroPersistencia) {
         listaResultado.pop_back();
         texto.setTexto(resultado.getValorColuna());
         resenha.setTexto(texto);
+
+        // Remover codigo;
+        if (listaResultado.empty())
+                throw EErroPersistencia("Lista de resultados vazia.");
+        resultado = listaResultado.back();
+        listaResultado.pop_back();
+        codigo.setCodigo(resultado.getValorColuna());
+        resenha.setCodigo(codigo);
 
         // Remover apelido;
         if (listaResultado.empty())

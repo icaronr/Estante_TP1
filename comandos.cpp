@@ -1,5 +1,32 @@
 #include "comandos.h"
 
+void ComandoIUUsuarioExibir::executar(ILNUsuario* cntrLNUsuario) throw(runtime_error){
+
+    Codigo codigo;
+    Livro livro;
+    Resultado resultado;
+    resultado = cntrLNUsuario->contabilizar();
+    int j = usuarioAtual.getUnidades().getUnidades();
+    int i=0;
+    system("cls");
+    cout << endl << "Estante do Usuario" << endl;
+    for(i=0; i<j;i++){
+        codigo = usuarioAtual.getEstante(i).getCodigo();
+        ComandoPesquisarLivro comandoPesquisarLivro(codigo);
+        comandoPesquisarLivro.executar();
+        livro = comandoPesquisarLivro.getResultado();
+        cout << endl << "Exemplar " << i+1 << endl;
+        cout << "Codigo             - " << livro.getCodigo().getCodigo() << endl;
+        cout << "Titulo             - " << livro.getTitulo().getTitulo() << endl;
+        cout << "Autor              - " << livro.getAutor().getAutor() << endl;
+        string data = livro.getData().getData();
+        cout << "Data de publicacao - " << data[0] << data[1] << "/" << data[2] << data[3] << "/" << data[4] << data[5] << endl;
+        cout << "Genero Literario   - " << livro.getGeneroLiterario().getGeneroLiterario() << endl;
+    }
+    cout << endl << "Pressione qualquer tecla para continuar..." << endl;
+    getch();
+
+}
 
 // Método por meio do qual é solicitada a execução do comando.
 ///Metodo que implementa a execucao da inclusao de um livro na estante do usuario.
@@ -142,7 +169,7 @@ void ComandoIUUsuarioConsultar::executar(ILNUsuario* cntrLNUsuario)throw(runtime
 
     while(true){
             system("CLS");
-            
+
         try{
             string codigoDoLivro;
             cout << "Digite o codigo do livro: ";
@@ -175,6 +202,33 @@ void ComandoIUUsuarioConsultar::executar(ILNUsuario* cntrLNUsuario)throw(runtime
     }
     else {
         cout << "Falha na execucao da operacao" << endl;
+        return;
+    }
+
+    ComandoPesquisarResenha comandoPesquisarResenha(codigo);
+    comandoPesquisarResenha.executar();
+    Resenha resenhaRecuperada;
+    int recuperouResenha = 0;
+    try{
+        while(true){
+
+          resenhaRecuperada = comandoPesquisarResenha.getResultado();
+          if(!recuperouResenha){
+            cout << endl << "Resenhas sobre este livro: " << endl;
+          }
+          cout << endl << "Resenha " << recuperouResenha+1;
+          cout << endl << "Apelido do autor   - " << resenhaRecuperada.getApelido().getApelido();
+          cout << endl << "Data da resenha    - " << resenhaRecuperada.getData().getData();
+          cout << endl << "Texto              - " << resenhaRecuperada.getTexto().getTexto() << endl;
+        }
+        recuperouResenha++;
+    }
+    catch(EErroPersistencia exp){
+
+        //Se nao encontrar nenhuma resenha
+        if(!recuperouResenha){
+            cout << endl << "Ainda nao existem resenhas sobre este livro!" << endl;
+        }
     }
 
     system("PAUSE");
@@ -254,7 +308,7 @@ void ComandoIUUsuarioEscrever::executar(ILNUsuario* cntrLNUsuario)throw(runtime_
             string textoResenha;
             cout << "Digite o texto da resenha: (max. 40 carac.)";
             cin.sync(); //sincronizar buffer para evitar loop
-            cin >> noskipws >> textoResenha;
+            getline(cin, textoResenha);
             texto.setTexto(textoResenha);
 
             string dataResenha;
@@ -302,7 +356,7 @@ void ComandoIUUsuarioTrocar::executar(ILNUsuario* cntrLNUsuario)throw(runtime_er
             cout << "1 - Indicar troca" << endl;
             cout << "2 - Procurar livros para troca" << endl;
             cout << "3 - Voltar ao menu principal" << endl;
-            //Sincroniza o buffer para evitar loops        
+            //Sincroniza o buffer para evitar loops
             cin.sync();
             cin >> opcao;
         if(opcao == 1){

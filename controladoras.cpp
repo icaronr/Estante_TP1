@@ -69,15 +69,19 @@ ResultadoAutenticacao CntrIUAutenticacao::cadastrar() throw(runtime_error) {
 
             try {
                 cout << "Digite o apelido (5 letras): ";
+                cin.sync();//refresh no buffer de entrada
                 cin >> entrada;
                 apelido.setApelido(entrada);
                 cout << "Digite a senha (4 letras sem repeticao): ";
+                cin.sync();//refresh no buffer de entrada
                 cin >> entrada;
                 senha.setSenha(entrada);
-                cout << "Digite o nome (até 15 caracteres)";
+                cout << "Digite o nome (ate 15 caracteres)";
+                cin.sync();//refresh no buffer de entrada
                 cin >> entrada;
                 nome.setNome(entrada);
                 cout << "Digite o telefone (11 caracteres)";
+                cin.sync();//refresh no buffer de entrada
                 cin >> entrada;
                 telefone.setTelefone(entrada);
                 break;
@@ -88,12 +92,19 @@ ResultadoAutenticacao CntrIUAutenticacao::cadastrar() throw(runtime_error) {
         }
 
         // Solicitar autenticação.
+        usuario.setApelido(apelido);
+        usuario.setNome(nome);
+        usuario.setSenha(senha);
+        usuario.setTelefone(telefone);
         resultado = cntrLNAutenticacao->cadastrar(usuario);
 
         // Informar resultado da autenticação.
 
         if(resultado.getValor() == ResultadoAutenticacao::FALHA){
-            cout << endl << "Falha na autenticacao." << endl;
+            cout << endl << "Falha no cadastro." << endl;
+            getch();
+            resultadoAutenticacao.setValor(resultado.getValor());
+            return resultadoAutenticacao;
         }else{
             resultadoAutenticacao.setValor(resultado.getValor());
             resultadoAutenticacao.setApelido(apelido);
@@ -123,6 +134,7 @@ void CntrIUUsuario::executar(const Apelido &apelido) throw(runtime_error){
 
         cout << endl << "Gerenciamento de Usuario." << endl << endl;
 
+        cout << "Exibir estante do usuario - " << EXIBIR << endl;
         cout << "Incluir Livro na estante  - " << INCLUIR << endl;
         cout << "Remover Livro da estante  - " << REMOVER << endl;
         cout << "Consultar dados de Livro  - " << CONSULTAR << endl;
@@ -145,6 +157,10 @@ void CntrIUUsuario::executar(const Apelido &apelido) throw(runtime_error){
             }
 
         switch(opcao){
+            case EXIBIR:    comando = new ComandoIUUsuarioExibir();
+                            comando->executar(cntrLNUsuario);
+                            delete comando;
+                            break;
             case INCLUIR:   comando = new ComandoIUUsuarioIncluir();
                             comando->executar(cntrLNUsuario);
                             delete comando;
@@ -248,19 +264,35 @@ Resultado CntrLNAutenticacao::cadastrar(const Usuario &usuario) throw(runtime_er
     cout << "Senha   = " << usuario.getSenha().getSenha() << endl;
 
     ResultadoAutenticacao resultado;
-
+    string apelidoRecuperado;
     // Diferentes comportamentos dependendo do valor da matrícula.
     // Procura o apelido no banco de dados, se nao encontrar -> cadastra, se encontrar -> diz que ja esta em uso
     try{
-        ComandoPesquisarUsuario comandoPesquisarUsuario(usuario.getApelido());
-        comandoPesquisarUsuario.executar();
-        Usuario usuarioRecuperado;
-        usuarioRecuperado = comandoPesquisarUsuario.getResultado();
+        ComandoLerApelidos comandoLerApelidos;
+        comandoLerApelidos.executar();
+        while(true){//quebra quando o getResultado acabar
+            apelidoRecuperado = comandoLerApelidos.getResultado();
+            cout << endl << apelidoRecuperado << endl;
+            //Se encontrar o apelido, retorna falha, pois nao podem haver 2 usuarios com o mesmo apelido
+            if(apelidoRecuperado == usuario.getApelido().getApelido()){
+                resultado.setValor(ResultadoAutenticacao::FALHA);
+                cout << endl << "Apelido ja cadastrado!" << endl;
+                getch();
+                return resultado;
+            }
+        }
+
     }
     catch(EErroPersistencia exp){
+
         resultado.setValor(ResultadoAutenticacao::SUCESSO);
         ComandoCadastrarUsuario comandoCadastrarUsuario(usuario);
         comandoCadastrarUsuario.executar();
+
+        ComandoPesquisarUsuario comandoPesquisarUsuario(usuario.getApelido());
+        comandoPesquisarUsuario.executar();
+        usuarioAtual = comandoPesquisarUsuario.getResultado();
+
         return resultado;
     }
     resultado.setValor(ResultadoAutenticacao::FALHA);
@@ -529,6 +561,7 @@ ResultadoResenha CntrLNUsuario::escrever(const Titulo &titulo, const Texto &text
     }
 
     ComandoCadastrarResenha comandoCadastrarResenha(resenha);
+    comandoCadastrarResenha.executar();
     resultado.setValor(Resultado::SUCESSO);
 
     return resultado;

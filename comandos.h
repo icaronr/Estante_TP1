@@ -29,6 +29,16 @@ public:
     virtual ~ComandoIUUsuario(){}
 };
 
+///Declaracao do metodo de exibicao de estante.
+class ComandoIUUsuarioExibir:public ComandoIUUsuario {
+
+public:
+
+    // Método por meio do qual é solicitada a execução do comando.
+
+    void executar(ILNUsuario*) throw(runtime_error);
+};
+
 ///Declaracao do metodo de inclusao de livro.
 class ComandoIUUsuarioIncluir:public ComandoIUUsuario {
 
