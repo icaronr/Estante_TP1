@@ -1,5 +1,12 @@
 #include "comandos.h"
-
+/**
+* M√©todo que implementa a exibicao da estante do usuario.
+* O metodo recebe um ponteiro que permite o contato da controladora de interface de usuario com a controladora de logica de negocio.
+* O metodo recebe um ponteiro que permite o contato da controladora de interface de usuario com a controladora de logica de negocio.
+* Resgata as unidades do usuario a partir da variavel global "usuarioAtual".
+* Utilizando um loop, pesquisa o codigo de cada exemplar da estante do usuario, exibindo na tela
+* as informacoes de cada livro. N√£o retorna valores.
+*/
 void ComandoIUUsuarioExibir::executar(ILNUsuario* cntrLNUsuario) throw(runtime_error){
 
     Codigo codigo;
@@ -28,13 +35,15 @@ void ComandoIUUsuarioExibir::executar(ILNUsuario* cntrLNUsuario) throw(runtime_e
 
 }
 
-// MÈtodo por meio do qual È solicitada a execuÁ„o do comando.
-///Metodo que implementa a execucao da inclusao de um livro na estante do usuario.
-///O metodo recebe um ponteiro que permite o contato da controladora de interface de usuario com a controladora de logica de negocio.
-///O metodo solicita ao usuario o codigo, titulo e gÍnero do livro em questao. As entradas do usuario ja sao validadas pelos metodos "set" de cada dominio.
-///As informacoes sao passadas como par‚metro ao metodo de remocao no servidor.
-///O resultado sera negativo apenas se o valor submetido for invalido ou causar falha no sistema.
-///O metodo nao retorna nenhum valor, apenas informa se as mudancas realizadas efetivamente pela logica de negocio tiveram ou nao sucesso.
+/**
+* M√©todo por meio do qual √© solicitada a execu√ß√£o do comando.
+* Metodo que implementa a execucao da inclusao de um livro na estante do usuario.
+* O metodo recebe um ponteiro que permite o contato da controladora de interface de usuario com a controladora de logica de negocio.
+* O metodo solicita ao usuario o codigo, titulo e g√™nero do livro em questao. As entradas do usuario ja sao validadas pelos metodos "set" de cada dominio.
+* As informacoes sao passadas como par√¢metro ao metodo de inclusao no servidor.
+* O resultado sera negativo apenas se o valor submetido for invalido ou causar falha no sistema.
+* O metodo nao retorna nenhum valor, apenas informa se as mudancas realizadas efetivamente pela logica de negocio tiveram ou nao sucesso.
+*/
 void ComandoIUUsuarioIncluir::executar(ILNUsuario* cntrLNUsuario) throw(runtime_error){
 
     Resultado resultado;
@@ -47,7 +56,7 @@ void ComandoIUUsuarioIncluir::executar(ILNUsuario* cntrLNUsuario) throw(runtime_
     Autor autor;
 
 
-    // CÛdigo de interaÁ„o com o usu·rio.
+    // C√≥digo de intera√ß√£o com o usu√°rio.
 
     while(true){
             system("CLS");
@@ -91,7 +100,7 @@ void ComandoIUUsuarioIncluir::executar(ILNUsuario* cntrLNUsuario) throw(runtime_
         }
     }
 
-    // Solicitar serviÁo.
+    // Solicitar servi√ßo.
     livro.setCodigo(codigo);
     livro.setTitulo(titulo);
     livro.setAutor(autor);
@@ -109,12 +118,14 @@ void ComandoIUUsuarioIncluir::executar(ILNUsuario* cntrLNUsuario) throw(runtime_
     system("PAUSE");
 }
 
-// MÈtodo por meio do qual È solicitada a execuÁ„o do comando.
-///Metodo que implementa a execucao da remocao de um livro na estante do usuario.
-///O metodo recebe um ponteiro que permite o contato da controladora de interface de usuario com a controladora de logica de negocio.
-///e solicitado ao usuario o codigo do livro em questao e este e enviado como par‚metro ao metodo de remocao efetiva no servidor.
-///O resultado sera negativo apenas se o valor submetido for invalido ou causar falha no sistema.
-///O metodo nao retorna nenhum valor, apenas informa se a exclusao teve ou nao sucesso.
+/**
+* M√©todo por meio do qual √© solicitada a execu√ß√£o do comando.
+* Metodo que implementa a execucao da remocao de um livro na estante do usuario.
+* O metodo recebe um ponteiro que permite o contato da controladora de interface de usuario com a controladora de logica de negocio.
+* e solicitado ao usuario o codigo do livro em questao e este e enviado como par√¢metro ao metodo de remocao efetiva no servidor.
+* O resultado sera negativo apenas se o valor submetido for invalido ou causar falha no sistema.
+* O metodo nao retorna nenhum valor, apenas informa se a exclusao teve ou nao sucesso.
+*/
 void ComandoIUUsuarioRemover::executar(ILNUsuario* cntrLNUsuario) throw(runtime_error){
 
     Resultado resultado;
@@ -122,7 +133,7 @@ void ComandoIUUsuarioRemover::executar(ILNUsuario* cntrLNUsuario) throw(runtime_
     Codigo codigo;
 
 
-    // CÛdigo de interaÁ„o com o usu·rio.
+    // C√≥digo de intera√ß√£o com o usu√°rio.
 
     while(true){
             system("CLS");
@@ -141,7 +152,7 @@ void ComandoIUUsuarioRemover::executar(ILNUsuario* cntrLNUsuario) throw(runtime_
         }
     }
 
-    // Solicitar serviÁo.
+    // Solicitar servi√ßo.
 
     resultado = cntrLNUsuario->remover(codigo);
 
@@ -154,18 +165,20 @@ void ComandoIUUsuarioRemover::executar(ILNUsuario* cntrLNUsuario) throw(runtime_
     system("PAUSE");
 }
 
-// MÈtodo por meio do qual È solicitada a execuÁ„o do comando.
-///Metodo que implementa a consulta de um livro.
-///O metodo recebe um ponteiro que permite o contato da controladora de interface de usuario com a controladora de logica de negocio.
-///e solicitado ao usuario o codigo do livro em questao e este e enviado como par‚metro ao metodo de consulta efetiva no servidor.
-///O resultado sera negativo apenas se o valor submetido for invalido ou causar falha no sistema.
-///O metodo nao retorna nenhum valor, apenas informa se a exclusao teve ou nao sucesso. Se teve, as informacoes do livro sao impressas na tela.
+/**
+* M√©todo por meio do qual √© solicitada a execu√ß√£o do comando.
+* Metodo que implementa a consulta de um livro.
+* O metodo recebe um ponteiro que permite o contato da controladora de interface de usuario com a controladora de logica de negocio.
+* e solicitado ao usuario o codigo do livro em questao e este e enviado como par√¢metro ao metodo de consulta efetiva no servidor.
+* O resultado sera negativo apenas se o valor submetido for invalido ou causar falha no sistema.
+* O metodo nao retorna nenhum valor, apenas informa se a exclusao teve ou nao sucesso. Se teve, as informacoes do livro sao impressas na tela.
+*/
 void ComandoIUUsuarioConsultar::executar(ILNUsuario* cntrLNUsuario)throw(runtime_error){
 
     ResultadoLivro resultado;
     Codigo codigo;
 
-     // CÛdigo de interaÁ„o com o usu·rio.
+     // C√≥digo de intera√ß√£o com o usu√°rio.
 
     while(true){
             system("CLS");
@@ -185,7 +198,7 @@ void ComandoIUUsuarioConsultar::executar(ILNUsuario* cntrLNUsuario)throw(runtime
     }
 
 
-    // Solicitar serviÁo.
+    // Solicitar servi√ßo.
 
 
     resultado = cntrLNUsuario->consultar(codigo);
@@ -234,19 +247,20 @@ void ComandoIUUsuarioConsultar::executar(ILNUsuario* cntrLNUsuario)throw(runtime
     system("PAUSE");
 }
 
-// MÈtodo por meio do qual È solicitada a execuÁ„o do comando.
-///Metodo que implementa a pesquisa de usuario na base de dados.
-///O metodo recebe um ponteiro que permite o contato da controladora de interface de usuario com a controladora de logica de negocio.
-///e solicitado ao usuario o apelido do usuario em questao e este e enviado como par‚metro ao metodo de pesquisa no servidor.
-///O resultado sera negativo apenas se o valor submetido for invalido ou causar falha no sistema.
-///O metodo nao retorna nenhum valor, apenas informa se a pesquisa teve ou nao sucesso. Se teve, os dados do usuario sao impressos em tela.
+/** 
+* Metodo que implementa a pesquisa de usuario na base de dados.
+* O metodo recebe um ponteiro que permite o contato da controladora de interface de usuario com a controladora de logica de negocio.
+* e solicitado ao usuario o apelido do usuario em questao e este e enviado como par√¢metro ao metodo de pesquisa no servidor.
+* O resultado sera negativo apenas se o valor submetido for invalido ou causar falha no sistema.
+* O metodo nao retorna nenhum valor, apenas informa se a pesquisa teve ou nao sucesso. Se teve, os dados do usuario sao impressos em tela.
+*/
 void ComandoIUUsuarioPesquisar::executar(ILNUsuario* cntrLNUsuario)throw(runtime_error){
 
     ResultadoUsuario resultado;
     Usuario usuario;
     Apelido apelido;
 
-    // CÛdigo de interaÁ„o com o usu·rio.
+    // C√≥digo de intera√ß√£o com o usu√°rio.
 
     while(true){
             system("CLS");
@@ -265,7 +279,7 @@ void ComandoIUUsuarioPesquisar::executar(ILNUsuario* cntrLNUsuario)throw(runtime
         }
     }
 
-    // Solicitar serviÁo.
+    // Solicitar servi√ßo.
 
 
     resultado = cntrLNUsuario->pesquisar(apelido);
@@ -283,17 +297,19 @@ void ComandoIUUsuarioPesquisar::executar(ILNUsuario* cntrLNUsuario)throw(runtime
     system("PAUSE");
 }
 
-///Metodo que permite o contato da controladora de interface de usuario com a controladora de logica de negocio para escrita de resenha.
-///e solicitado ao usuario o titulo do livro, o texto da resenha e a data da submissao. Estes sao enviados como par‚metro ao metodo de inclusao efetiva no servidor.
-///O resultado sera negativo apenas se o valor submetido for invalido ou causar falha no sistema.
-///O metodo nao retorna nenhum valor, apenas informa se a operacao teve ou nao sucesso.
+/**
+* Metodo que permite o contato da controladora de interface de usuario com a controladora de logica de negocio para escrita de resenha.
+* e solicitado ao usuario o titulo do livro, o texto da resenha e a data da submissao. Estes sao enviados como par√¢metro ao metodo de inclusao efetiva no servidor.
+* O resultado sera negativo apenas se o valor submetido for invalido ou causar falha no sistema.
+* O metodo nao retorna nenhum valor, apenas informa se a operacao teve ou nao sucesso.
+*/
 void ComandoIUUsuarioEscrever::executar(ILNUsuario* cntrLNUsuario)throw(runtime_error){
 
     ResultadoResenha resultado;
     Titulo titulo;
     Texto texto;
     Data data;
-    // CÛdigo de interaÁ„o com o usu·rio.
+    // C√≥digo de intera√ß√£o com o usu√°rio.
     while(true){
             system("CLS");
 
@@ -325,7 +341,7 @@ void ComandoIUUsuarioEscrever::executar(ILNUsuario* cntrLNUsuario)throw(runtime_
     }
 
 
-    // Solicitar serviÁo.
+    // Solicitar servi√ßo.
 
 
     resultado = cntrLNUsuario->escrever(titulo, texto, data);
@@ -339,10 +355,14 @@ void ComandoIUUsuarioEscrever::executar(ILNUsuario* cntrLNUsuario)throw(runtime_
     system("PAUSE");
 }
 
-///O metodo recebe um ponteiro que permite o contato da controladora de interface de usuario com a controladora de logica de negocio.
-///e solicitado ao usuario o titulo do livro em questao e este e enviado como par‚metro ao metodo de troca efetiva em servidor.
-///O resultado sera negativo apenas se o valor submetido for invalido ou causar falha no sistema.
-///O metodo nao retorna nenhum valor, apenas informa se a operacao teve ou nao sucesso.
+/**
+* Metodo que implementa a execucao do comando de troca de livro.
+* O metodo recebe um ponteiro que permite o contato da controladora de interface de usuario com a controladora de logica de negocio.
+* Oferece ao usuario as opcoes de troca, cuja selecao √© feita utilizando a variavel "int opcao".
+* No caso da opcao 1, solicita o titulo do livro.
+* No caso da opcao 2, solicita o titulo do livro, busca usuarios com aquele livro na base de dados e realiza a troca.
+* Nao retorna valores.
+*/
 void ComandoIUUsuarioTrocar::executar(ILNUsuario* cntrLNUsuario)throw(runtime_error){
 
     ResultadoUsuario resultado;
@@ -350,7 +370,7 @@ void ComandoIUUsuarioTrocar::executar(ILNUsuario* cntrLNUsuario)throw(runtime_er
     Titulo titulo;
 
 
-    // CÛdigo de interaÁ„o com o usu·rio.
+    // C√≥digo de intera√ß√£o com o usu√°rio.
     while(true){
             system("CLS");
             cout << "1 - Indicar troca" << endl;
@@ -391,7 +411,7 @@ void ComandoIUUsuarioTrocar::executar(ILNUsuario* cntrLNUsuario)throw(runtime_er
     }
 
 
-    // Solicitar serviÁo.
+    // Solicitar servi√ßo.
 
     if(opcao == 1){
         resultado = cntrLNUsuario->trocar(titulo, 1);
