@@ -250,7 +250,7 @@ void ComandoIUUsuarioConsultar::executar(ILNUsuario* cntrLNUsuario)throw(runtime
     system("PAUSE");
 }
 
-/** 
+/**
 * Metodo que implementa a pesquisa de usuario na base de dados.
 * O metodo recebe um ponteiro que permite o contato da controladora de interface de usuario com a controladora de logica de negocio.
 * e solicitado ao usuario o apelido do usuario em questao e este e enviado como parâmetro ao metodo de pesquisa no servidor.
@@ -362,8 +362,8 @@ void ComandoIUUsuarioEscrever::executar(ILNUsuario* cntrLNUsuario)throw(runtime_
 * Metodo que implementa a execucao do comando de troca de livro.
 * O metodo recebe um ponteiro que permite o contato da controladora de interface de usuario com a controladora de logica de negocio.
 * Oferece ao usuario as opcoes de troca, cuja selecao é feita utilizando a variavel "int opcao".
-* No caso da opcao 1, solicita o titulo do livro.
-* No caso da opcao 2, solicita o titulo do livro, busca usuarios com aquele livro na base de dados e realiza a troca.
+* No caso da opcao 1, solicita o titulo do livro e atualiza o bd.
+* No caso da opcao 2, solicita o titulo do livro, busca usuarios com aquele livro na base de dados e mostra todos que estao disponiveis.
 * Nao retorna valores.
 */
 void ComandoIUUsuarioTrocar::executar(ILNUsuario* cntrLNUsuario)throw(runtime_error){
