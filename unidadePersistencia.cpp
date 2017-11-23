@@ -214,6 +214,7 @@ ComandoPesquisarLivro::ComandoPesquisarLivro(Titulo titulo) {
         comandoSQL += ";";
 }
 
+
 Livro ComandoPesquisarLivro::getResultado() throw (EErroPersistencia) {
         ElementoResultado resultado;
         Livro livro;
@@ -501,6 +502,6 @@ ComandoAtualizarExemplar::ComandoAtualizarExemplar(Exemplar exemplar) {
         comandoSQL += "SET apelido = '" + exemplar.getApelido().getApelido();
         comandoSQL += "', codigo = '" + exemplar.getCodigo().getCodigo();
         comandoSQL += "', troca = '" + exemplar.getTroca().getTroca();
-        comandoSQL += "' WHERE codigo = " + exemplar.getCodigo().getCodigo();
+        comandoSQL += "' WHERE codigo = '" + exemplar.getCodigo().getCodigo() + "'";
         comandoSQL += " AND apelido = '" + exemplar.getApelido().getApelido() + "';";
 }

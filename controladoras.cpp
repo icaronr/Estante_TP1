@@ -620,6 +620,8 @@ ResultadoUsuario CntrLNUsuario::trocar(const Titulo &titulo, const int operacao)
 
     ResultadoUsuario resultado;
     try{
+        cout << endl << "'" << titulo.getTitulo() << "'" << endl;
+        getch();
         ComandoPesquisarLivro comandoPesquisarLivro(titulo);
         comandoPesquisarLivro.executar();
         livroRecuperado = comandoPesquisarLivro.getResultado();
@@ -627,9 +629,11 @@ ResultadoUsuario CntrLNUsuario::trocar(const Titulo &titulo, const int operacao)
     catch(EErroPersistencia exp){
         cout << "O livro informado nao esta cadastrado!" << endl;
         resultado.setValor(Resultado::FALHA);
+        system("PAUSE");
         return resultado;
 
     }
+
     exemplar.setApelido(usuarioAtual.getApelido());
     exemplar.setCodigo(livroRecuperado.getCodigo());
     troca.setTroca("1");
@@ -637,11 +641,11 @@ ResultadoUsuario CntrLNUsuario::trocar(const Titulo &titulo, const int operacao)
 
     if(operacao == 1){
         try{
+            Resultado resultadoContabilizar;
+            resultadoContabilizar = (CntrLNUsuario::contabilizar());
             Exemplar exemplarRecuperado;
-/*ComandoPesquisarExemplar comandoPesquisarExemplar(livroRecuperado.getCodigo());
-            comandoPesquisarExemplar.executar();
-            exemplarRecuperado = comandoPesquisarExemplar.getResultado*/
-            for(int i = 0; i<10; i++){
+            int j = usuarioAtual.getUnidades().getUnidades();
+            for(int i = 0; i<j; i++){
                 exemplarRecuperado = usuarioAtual.getEstante(i);
                 if(exemplarRecuperado.getCodigo().getCodigo() == livroRecuperado.getCodigo().getCodigo()){
                     ComandoAtualizarExemplar comandoAtualizarExemplar(exemplar);
@@ -651,16 +655,17 @@ ResultadoUsuario CntrLNUsuario::trocar(const Titulo &titulo, const int operacao)
 
                 }
 
-
             }
             cout << endl << "O livro nao esta presente na sua estante!" << endl;
             resultado.setValor(Resultado::FALHA);
+            system("PAUSE");
             return resultado;
 
         }
         catch(EErroPersistencia exp){
             cout << endl << "O livro nao esta presente na sua estante!" << endl;
             resultado.setValor(Resultado::FALHA);
+            system("PAUSE");
             return resultado;
         }
 
@@ -693,6 +698,7 @@ ResultadoUsuario CntrLNUsuario::trocar(const Titulo &titulo, const int operacao)
             if(exemplarTrocaGlobal.empty()){
                 cout << "Nao foram encontrados usuarios com esse livro para troca." << endl;
                 resultado.setValor(Resultado::FALHA);
+                system("PAUSE");
                 return resultado;
             }else{
                 resultado.setValor(Resultado::SUCESSO);

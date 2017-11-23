@@ -443,6 +443,10 @@ Codigo codigo;
     }
     else if(resultado.getValor() == Resultado::FALHA){
         cout << "Falha na execucao da operacao" << endl;
+        return;
     }
+
+
     system("PAUSE");
+    return;
 }
